@@ -10,13 +10,14 @@ import {
     useBreakpointValue,
     Container,
     Heading,
-    Menu, 
+    Menu,
     MenuButton,
     MenuList,
     MenuItem,
 } from "@chakra-ui/react";
 import DarkModeSwitch from './DarkModeSwitch';
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
@@ -70,7 +71,7 @@ const Navbar = () => {
                                 }}
                             >
                                 {/* react royter <Link> will come here */}
-                                <a href="/">Smartfundz</a>
+                                <Link to="/">Etherfunds</Link>
                             </Box>
                         </Heading>
                     </Flex>
@@ -87,7 +88,7 @@ const Navbar = () => {
                             variant={"link"}
                             display={{ base: "none", md: "inline-flex" }}
                         >
-                            <a href="">Create new Campaign</a>
+                            <Link to="/fundraiser/new/">Create new Fundraiser</Link>
                         </Button>
 
                         <Button
@@ -96,18 +97,18 @@ const Navbar = () => {
                             variant={"link"}
                             display={{ base: "none", md: "inline-flex" }}
                         >
-                            <a href="/howitworks"> How it Works</a>
+                            <a href="/#howitworks"> How it Works</a>
                         </Button>
 
-                        <DarkModeSwitch/>
+                        <DarkModeSwitch />
                     </Stack>
                     <Flex display={{ base: "flex", md: "none" }}>
                         <DarkModeSwitch />
                     </Flex>
                 </Container>
-            </Flex>    
+            </Flex>
         </Box>
-    ); 
+    );
 };
 
 export default Navbar;

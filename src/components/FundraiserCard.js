@@ -12,11 +12,11 @@ import {
     Progress,
 } from "@chakra-ui/react";
 
-const CampaignCard = ({name, description, creatorId, imageURL, id, balance, target, ethPrice}) => {
+const FundraiserCard = ({ name, description, creatorId, imageURL, id, balance, target, ethPrice }) => {
 
     return (
         // pls add a Navlink component
-        <a href={`/campaign/${id}`}>
+        <a href={`/Fundraiser/${id}`}>
             <Box
                 bg={useColorModeValue("white", "gray.800")}
                 maxW={{ md: "sm" }}
@@ -142,4 +142,4 @@ const CampaignCard = ({name, description, creatorId, imageURL, id, balance, targ
     );
 };
 
-export default CampaignCard;
+export default FundraiserCard;

@@ -16,14 +16,15 @@ import {
     Icon,
     chakra,
     Tooltip,
-    Link,
     SkeletonCircle,
     HStack,
     Stack,
     Progress,
 } from "@chakra-ui/react";
-import CampaignCard from '../components/CampaignCard';
+import FundraiserCard from '../components/FundraiserCard';
 import { FcShare, FcDonate, FcMoneyTransfer } from "react-icons/fc";
+import { Link } from 'react-router-dom';
+
 import styles from '../styles/Home.module.css'
 
 const LandingPage = () => {
@@ -42,7 +43,7 @@ const LandingPage = () => {
                 </Heading>
 
                 {/* Navlink will come here */}
-                <a href="/campaign/new">
+                <Link to="/fundraiser/new/">
                     <Button
                         display={{ sm: "inline-flex" }}
                         fontSize={"md"}
@@ -53,46 +54,46 @@ const LandingPage = () => {
                             bg: "teal.300",
                         }}
                     >
-                        Create Campaign
+                        Create Fundraiser
                     </Button>
-                </a>
+                </Link>
             </Container>
 
             <Container py={{ base: "4", md: "12" }} maxW={"7xl"}>
                 <HStack spacing={2}>
                     <SkeletonCircle size="4" />
                     <Heading as="h2" size="lg">
-                        Open Campaigns
+                        Open Fundraisers
                     </Heading>
                 </HStack>
 
                 <Divider marginTop="4" />
 
                 <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={8}>
-                <div>
-                    <CampaignCard
-                        name="test fundname"
-                        description="Just testing"
-                        creatorId="Some SHA string"
-                        imageURL="TBD"
-                        id="umm nope"
-                        target="10,000"
-                        balance="10"
-                        ethPrice="10 ETH"
-                    />
-                </div>
-                <div>
-                    <CampaignCard
-                        name="test fundname"
-                        description="Just testing"
-                        creatorId="Some SHA string"
-                        imageURL="TBD"
-                        id="umm nope"
-                        target="10,000"
-                        balance="0"
-                        ethPrice="10 ETH"
-                    />
-                </div>
+                    <div>
+                        <FundraiserCard
+                            name="test fundname"
+                            description="Just testing"
+                            creatorId="Some SHA string"
+                            imageURL="TBD"
+                            id="umm nope"
+                            target="10,000"
+                            balance="10"
+                            ethPrice="10 ETH"
+                        />
+                    </div>
+                    <div>
+                        <FundraiserCard
+                            name="test fundname"
+                            description="Just testing"
+                            creatorId="Some SHA string"
+                            imageURL="TBD"
+                            id="umm nope"
+                            target="10,000"
+                            balance="0"
+                            ethPrice="10 ETH"
+                        />
+                    </div>
                 </SimpleGrid>
             </Container>
 
@@ -100,23 +101,23 @@ const LandingPage = () => {
                 <HStack spacing={2}>
                     <SkeletonCircle size="4" />
                     <Heading as="h2" size="lg">
-                        How SmartFundz Works
+                        How Etherfunds Works
                     </Heading>
                 </HStack>
                 <Divider marginTop="4" />
                 <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={8}>
                     <FeatureBox
                         icon={<Icon as={FcDonate} w={10} h={10} />}
-                        title={"Create a Campaign for Fundraising"}
+                        title={"Create a Fundraiser for Fundraising"}
                         text={
                             "It’ll take only 2 minutes. Just enter a few details about the funds you are raising for."
                         }
                     />
                     <FeatureBox
                         icon={<Icon as={FcShare} w={10} h={10} />}
-                        title={"Share your Campaign"}
+                        title={"Share your Fundraiser"}
                         text={
-                            "All you need to do is share the Campaign with your friends, family and others. In no time, support will start pouring in."
+                            "All you need to do is share the Fundraiser with your friends, family and others. In no time, support will start pouring in."
                         }
                     />
                     <FeatureBox
@@ -127,10 +128,10 @@ const LandingPage = () => {
                         }
                     />
                 </SimpleGrid>
-                
+
             </Container>
         </main>
-  </div>;
+    </div>;
 };
 
 export default LandingPage;
