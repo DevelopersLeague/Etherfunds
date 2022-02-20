@@ -106,7 +106,7 @@ const FundraiserCard = ({ name, description, creatorId, imageURL, id, balance, t
                                     pr={2}
                                     fontWeight={"bold"}
                                 >
-                                    {" "}
+                                    {balance}
                                     ETH
                                 </Text>
                                 <Text
@@ -120,18 +120,18 @@ const FundraiserCard = ({ name, description, creatorId, imageURL, id, balance, t
                                 </Text>
                             </Box>
 
-                            {/* <Text fontSize={"md"} fontWeight="normal">
-                                target of {web3.utils.fromWei(target, "ether")}
+                            <Text fontSize={"md"} fontWeight="normal">
+                                target of {target}
                                 ETH
-                                (${getWEIPriceInUSD(ethPrice, target)})
-                            </Text> */}
+                                {/* (${getWEIPriceInUSD(ethPrice, target)}) */}
+                            </Text>
                             <Progress
                                 colorScheme="teal"
                                 size="sm"
                                 // value={web3.utils.fromWei(balance, "ether")}
                                 // max={web3.utils.fromWei(target, "ether")}
-                                value="30"
-                                max="100"
+                                value={balance}
+                                max={target}
                                 mt="2"
                             />
                         </Box>{" "}

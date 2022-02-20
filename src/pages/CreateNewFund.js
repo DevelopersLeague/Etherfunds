@@ -61,31 +61,7 @@ const CreateNewFund = () => {
                 >
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Stack spacing={4}>
-                            <FormControl id="minimumContribution">
-                                <FormLabel>Minimum Contribution Amount</FormLabel>
-
-                                <InputGroup>
-                                    <Input
-                                        type="number"
-                                        step="any"
-                                        {...register("minimumContribution", { required: true })}
-                                        isDisabled={isSubmitting}
-                                        onChange={(e) => {
-                                            // setMinContriInUSD(Math.abs(e.target.value));
-                                        }}
-                                    />
-
-                                    <InputRightAddon children="ETH" />
-                                </InputGroup>
-
-                                {/* {minContriInUSD ? (
-                                    <FormHelperText>
-                                        ~$ {getETHPriceInUSD(ETHPrice, minContriInUSD)}
-                                    </FormHelperText>
-                                ) : null} */}
-
-                            </FormControl>
-
+                            
                             <FormControl id="FundName">
                                 <FormLabel>Fund Name</FormLabel>
                                 <Input
