@@ -38,6 +38,7 @@ const CreateNewFund = () => {
             data.target
         );
         // transfer of ether logic will go here
+        // 
     }
 
     return (
