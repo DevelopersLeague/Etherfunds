@@ -169,6 +169,11 @@ describe("Etherfunds", () => {
         .createCampaign("test12", "test12", 100);
       const resp2 = await tx2.wait();
       const id2 = resp2.events[0].args.id;
+      const tx3 = await etherFund
+        .connect(owner)
+        .createCampaign("test12", "test12", 100);
+      const resp3 = await tx2.wait();
+      const id3 = resp2.events[0].args.id;
       await etherFund.connect(user).contribute(id, 100, {
         value: "100",
       });
