@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "prebuild": "cd src/backend && npx hardhat compile",
+    "prebuild": "cd src/backend && npm install && npx hardhat compile",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
