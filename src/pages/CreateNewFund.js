@@ -21,8 +21,12 @@ import {
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { useMetamask } from "use-metamask";
+import { ethers } from 'ethers';
 
 const CreateNewFund = () => {
+
+    const { connect, metaState } = useMetamask();
 
     const { handleSubmit, register, formState: { isSubmitting, errors } } = useForm({
         mode: "onChange"
@@ -129,27 +133,30 @@ const CreateNewFund = () => {
 
                             <Stack spacing={10}>
 
-                                {/* conditional rendering if wallet is  connected will come here */}
                                 <Stack spacing={3}>
-                                    <Button
+                                {/* conditional rendering if wallet is  connected will come here */}
+                                {metaState.isConnected ?
+                                
+                                    (<Button
                                         color={"white"}
                                         bg={"teal.400"}
                                         _hover={{
                                             bg: "teal.300",
                                         }}
                                         onClick={
-                                            // () => wallet.connect()
                                             console.log("Hello")
                                         }
                                     >
-                                        Connect Wallet{" "}
-                                    </Button>
+                                        Submit {" "}
+                                    </Button>): 
+                                    
                                     <Alert status="warning">
                                         <AlertIcon />
                                         <AlertDescription mr={2}>
                                             Please Connect Your Wallet First to Create a Fund
                                         </AlertDescription>
                                     </Alert>
+                                }
                                 </Stack>
                             </Stack>
                         </Stack>

@@ -4,10 +4,20 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ClientTest from "./lib/ClientTest";
+import { MetamaskStateProvider } from "use-metamask";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+const queryClient = new QueryClient()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MetamaskStateProvider>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </MetamaskStateProvider>
     {/* <ClientTest /> */}
   </React.StrictMode>,
   document.getElementById("root")

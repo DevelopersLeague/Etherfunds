@@ -18,8 +18,26 @@ import {
 import DarkModeSwitch from './DarkModeSwitch';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Link } from 'react-router-dom';
+import { useMetamask } from "use-metamask";
+import { ethers } from 'ethers';
 
 const Navbar = () => {
+
+    const { connect, metaState } = useMetamask();
+
+    const connectWallet = async() => {
+        if (!metaState.isConnected) {
+            
+            try {
+                await connect(ethers.providers.Web3Provider);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        // console.log("Wallet connectred ");
+    }
+    
     return (
         <Box>
             <Flex
@@ -82,14 +100,19 @@ const Navbar = () => {
                         spacing={6}
                         display={{ base: "none", md: "flex" }}
                     >
-                        <Button
-                            fontSize={"md"}
-                            fontWeight={600}
-                            variant={"link"}
-                            display={{ base: "none", md: "inline-flex" }}
-                        >
-                            <Link to="/fundraiser/new/">Create new Fundraiser</Link>
-                        </Button>
+                        {metaState.isConnected ? null : 
+                        
+                            <Button
+                                fontSize={"md"}
+                                fontWeight={600}
+                                variant={"link"}
+                                display={{ base: "none", md: "inline-flex" }}
+                                onClick={connectWallet}
+                            >
+                                Connect Wallet
+                            </Button>
+                        }
+
 
                         <Button
                             fontSize={"md"}
