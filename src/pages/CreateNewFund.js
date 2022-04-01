@@ -23,11 +23,14 @@ import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useMetamask } from "use-metamask";
 import { ethers } from 'ethers';
-
+import useCreateCampaignMutation from '../hooks/mutations/useCreateCampaignMutation';
+import { useNavigate } from "react-router-dom";
 const CreateNewFund = () => {
-
+    
+    let navigate = useNavigate();
     const { connect, metaState } = useMetamask();
 
+    const { mutate, isLoading } = useCreateCampaignMutation();
     const { handleSubmit, register, formState: { isSubmitting, errors } } = useForm({
         mode: "onChange"
     })
@@ -35,14 +38,19 @@ const CreateNewFund = () => {
 
     async function onSubmit(data) {
         console.log(
-            data.minimumContribution,
             data.FundName,
             data.description,
-            data.imageUrl,
+            // data.imageUrl,
             data.target
         );
+        mutate({name: data.FundName, description: data.description, goal: data.target},{
+            onSuccess:()=>{
+                navigate(`/`);
+            }
+        })
         // transfer of ether logic will go here
         // 
+        
     }
 
     return (
@@ -83,14 +91,14 @@ const CreateNewFund = () => {
                                 />
                             </FormControl>
 
-                            <FormControl id="imageUrl">
+                            {/* <FormControl id="imageUrl">
                                 <FormLabel>Image URL</FormLabel>
                                 <Input
                                     {...register("imageUrl", { required: true })}
                                     isDisabled={isSubmitting}
                                     type="url"
                                 />
-                            </FormControl>
+                            </FormControl> */}
 
                             <FormControl id="target">
                                 <FormLabel>Target Amount</FormLabel>
@@ -143,9 +151,8 @@ const CreateNewFund = () => {
                                         _hover={{
                                             bg: "teal.300",
                                         }}
-                                        onClick={
-                                            console.log("Hello")
-                                        }
+                                        type={'submit'}
+                                        isLoading={isLoading}
                                     >
                                         Submit {" "}
                                     </Button>): 

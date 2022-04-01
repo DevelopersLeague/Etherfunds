@@ -30,26 +30,42 @@ import FundDetailsCard from '../components/FundDetailsCard'
 import { InfoIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import funds from '../data';
+// import funds from '../data';
+import useGetAllCampaigns from '../hooks/queries/useGetAllCampaigns';
+import { useMetamask } from "use-metamask";
+import useContributeMutation from '../hooks/mutations/useContributeMutation';
+
 const FundDetails = () => {
 	// contains key value object 
 	const params = useParams();
-	const obj = funds.filter((fund) => {
-		// console.log(fund.id, params.id);
-		if (fund.id == params.id)
-			return fund;
-	})
-	console.log("Obj:", obj[0]);
-	const { id, minimumContribution, balance, name, description, image, target } = obj[0];
+	const { isLoading, data: funds } = useGetAllCampaigns();
 	const { handleSubmit, register, formState, reset, getValues } = useForm({
 		mode: "onChange",
 	});
+	const { connect, metaState } = useMetamask();
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [error, setError] = useState("");
 	const [amountInRS, setAmountInRS] = useState();
+	const graygray = useColorModeValue("gray.500", "gray.200")
+	const whitegray = useColorModeValue("white", "gray.700")
+	const graywhite = useColorModeValue("gray.800", "white")
+	const tealwhite = useColorModeValue("teal.800", "white")
+	const tealteal = useColorModeValue("teal.600", "teal.200")
+	const { mutate, isLoading:isMutationLoading } = useContributeMutation();
 
+	if (isLoading)
+			return <h2>Loading...</h2>
+
+	const obj = funds.filter((fund) => {
+		// console.log(fund.id, params.id);
+		if (fund.id.toString() == params.id)
+			return fund;
+	})
+	// console.log("Obj:", obj[0]);
+	const { id, balance, name, description, image, goal: target, manager, contributorCount} = obj[0];
+	
 	async function onSubmit(data) {
-		console.log(data);
+		console.log("data",typeof(+data.value));
 
 		// submit donation logic goess here
 		// setAmountInRS(null)
@@ -58,6 +74,14 @@ const FundDetails = () => {
 		// });
 		// setIsSubmitted(true);
 		// setError(false);
+		mutate({
+			campaignId: +params.id,
+			amount: +data.value,
+		}, {
+			onSuccess: () => {
+				reset({value: ""});
+			}
+		})
 	}
 	return (
 		<main>
@@ -77,37 +101,37 @@ const FundDetails = () => {
 							{name}
 						</Heading>
 						<Text
-							color={useColorModeValue("gray.500", "gray.200")}
+							color={graygray}
 							fontSize={{ base: "lg" }}>
 							{description}
 						</Text>
-						<Link
+						{/* <Link
 							color="teal.500"
 							href={`https://rinkeby.etherscan.io/address/${id}`}
 							isExternal>
 							View on Rinkeby Etherscan <ExternalLinkIcon mx="2px" />
-						</Link>
+						</Link> */}
 
 						<Box mx={"auto"} w={"full"}>
 							<SimpleGrid columns={{ base: 1 }} spacing={{ base: 5 }}>
 								{/* please remove hard coding here */}
 								<FundDetailsCard
 									title={"Wallet Address of Fund Creator"}
-									stat="0xggdgdhddhdn"
+									stat={manager}
 									info={
 										"The Fund Creator created the Fund and can create requests to withdraw money."
 									}
 								/>
 								<FundDetailsCard
 									title={"Number of Requests"}
-									stat="5"
+									stat={"5"}
 									info={
 										"A request tries to withdraw money from the contract. Requests must be approved by contributors"
 									}
 								/>
 								<FundDetailsCard
 									title={"Number of Contributors"}
-									stat="19"
+									stat={contributorCount.toString()}
 									info={
 										"Number of people who have already donated to this Fund"
 									}
@@ -119,7 +143,7 @@ const FundDetails = () => {
 					<Stack spacing={{ base: 4 }}>
 						<Box>
 							<Stat
-								bg={useColorModeValue("white", "gray.700")}
+								bg={whitegray}
 								boxShadow={"lg"}
 								rounded={"xl"}
 								p={{ base: 4, sm: 6, md: 8 }}
@@ -132,14 +156,14 @@ const FundDetails = () => {
 									</Text>
 									<Tooltip
 										label="The balance is how much money this Fundraiser has left to spend."
-										bg={useColorModeValue("white", "gray.700")}
+										bg={whitegray}
 										placement={"top"}
-										color={useColorModeValue("gray.800", "white")}
+										color={graywhite}
 										fontSize={"1em"}
 										px="4"
 									>
 										<InfoIcon
-											color={useColorModeValue("teal.800", "white")}
+											color={tealwhite}
 										/>
 									</Tooltip>
 								</StatLabel>
@@ -152,19 +176,19 @@ const FundDetails = () => {
 									>
 										<Text
 											as="span"
-											display={Number(balance) > 0 ? "inline" : "none"}
+											// display={Number(balance.toString()) > 0 ? "inline" : "none"}
 											pr={2}
 											fontWeight={"bold"}
 										>
-											{balance}
+											{balance.toString()}
 											ETH
 										</Text>
 										<Text
 											as="span"
 											fontSize="lg"
-											display={balance > 0 ? "inline" : "none"}
+											// display={balance > 0 ? "inline" : "none"}
 											fontWeight={"normal"}
-											color={useColorModeValue("gray.500", "gray.200")}
+											color={graygray}
 										>
 											{/* (${getWEIPriceInRS(ETHPrice, balance)}) */}
 											(XXX Rs)
@@ -172,14 +196,14 @@ const FundDetails = () => {
 									</Box>
 
 									<Text fontSize={"md"} fontWeight="normal">
-										target of {target} ETH (Rs
+										target of {target.toString()} ETH (Rs
 										{"XXX"})
 									</Text>
 									<Progress
 										colorScheme="teal"
 										size="sm"
-										value={balance}
-										max={target}
+										value={balance.toString()}
+										max={target.toString()}
 										mt={4}
 									/>
 								</StatNumber>
@@ -187,7 +211,7 @@ const FundDetails = () => {
 						</Box>
 
 						<Stack
-							bg={useColorModeValue("white", "gray.700")}
+							bg={whitegray}
 							boxShadow={"lg"}
 							rounded={"xl"}
 							p={{ base: 4, sm: 6, md: 8 }}
@@ -196,7 +220,7 @@ const FundDetails = () => {
 							<Heading
 								lineHeight={1.1}
 								fontSize={{ base: "2xl", sm: "3xl" }}
-								color={useColorModeValue("teal.600", "teal.200")}
+								color={tealteal}
 							>
 								Contribute Now!
 							</Heading>
@@ -212,7 +236,7 @@ const FundDetails = () => {
 											<Input
 												{...register("value", { required: true })}
 												type="number"
-												isDisabled={formState.isSubmitting}
+												isDisabled={isMutationLoading}
 												onChange={(e) => {
 													// setAmountInRS(Math.abs(e.target.value));
 													console.log(e)
@@ -240,35 +264,43 @@ const FundDetails = () => {
 
 									<Stack spacing={10}>
 										{/* Add conditional rendering for when wallet is connected */}
-										<Button
-											fontFamily={"heading"}
-											mt={4}
-											w={"full"}
-											bgGradient="linear(to-r, teal.400,green.400)"
-											color={"white"}
-											_hover={{
-												bgGradient: "linear(to-r, teal.400,blue.400)",
-												boxShadow: "xl",
-											}}
-											isLoading={formState.isSubmitting}
-											isDisabled={amountInRS ? false : true}
-											type="submit"
-										>
-											Contribute
-										</Button>
-										<Alert status="warning" mt={4}>
-											<AlertIcon />
-											<AlertDescription mr={2}>
-												Please Connect Your Wallet to Contribute
-											</AlertDescription>
-										</Alert>
+											<Button
+												fontFamily={"heading"}
+												mt={4}
+												w={"full"}
+												bgGradient="linear(to-r, teal.400,green.400)"
+												color={"white"}
+												_hover={{
+													bgGradient: "linear(to-r, teal.400,blue.400)",
+													boxShadow: "xl",
+												}}
+												isLoading={isMutationLoading}
+												isDisabled={metaState.isConnected ? false : true}
+												type="submit"
+											>
+												
+												Contribute
+											</Button>
+											
+										{
+											metaState.isConnected?null:
+											<Alert status="warning" mt={4}>
+												<AlertIcon />
+												<AlertDescription mr={2}>
+													Please Connect Your Wallet to Contribute
+												</AlertDescription>
+											</Alert>
+										}
+
+										
+										
 									</Stack>
 								</form>
 							</Box>
 						</Stack>
 
 						<Stack
-							bg={useColorModeValue("white", "gray.700")}
+							bg={whitegray}
 							boxShadow={"lg"}
 							rounded={"xl"}
 							p={{ base: 4, sm: 6, md: 8 }}

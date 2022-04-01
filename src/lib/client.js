@@ -13,19 +13,6 @@ export class EtherFundClient {
   setContract(address, abi) {
     this._contract = new ethers.Contract(address, abi, this._signer);
   }
-  async getAllCampaigns() {
-    this._validate();
-    return await this._contract.getAllCampaigns();
-  }
-  async createCampaign({ name, description, goal }) {
-    this._validate();
-    const tx = await this._contract.createCampaign(name, description, goal);
-    const resp = await tx.wait();
-    const campaign = resp.events.find(
-      (e) => e.event === "CampaignCreated"
-    ).args;
-    return campaign;
-  }
   _validate() {
     if (this._contract == null) {
       throw new Error("contract not set call setContract first");
@@ -36,5 +23,49 @@ export class EtherFundClient {
     if (this._signer == null) {
       throw new Error("signer not set call setProvider first");
     }
+  }
+  async getAllCampaigns() {
+    this._validate();
+    const campaigns = await this._contract.getAllCampaigns();
+    const resp = campaigns.map(campaign =>{
+      return {
+      id: campaign[0],
+      manager: campaign[1],
+      name: campaign[2],
+      description: campaign[3],
+      goal: campaign[4],
+      balance: campaign[5],
+      timestamp: campaign[6],
+      contributorCount: campaign[7]
+      }
+    })
+    return resp;
+  }
+  async createCampaign({ name, description, goal }) {
+    this._validate();
+    const tx = await this._contract.createCampaign(name, description, goal);
+    const resp = await tx.wait();
+    const campaign = resp.events.find(
+      (e) => e.event === "CampaignCreated"
+    ).args;
+    // return campaign;
+    const campResp = {
+      id: campaign[0],
+      manager: campaign[1],
+      name: campaign[2],
+      description: campaign[3],
+      goal: campaign[4],
+      balance: campaign[5],
+      timestamp: campaign[6],
+    }
+    return campResp;
+  }
+  async contribute({campaignId, amount}){
+    this._validate();
+    const tx = await this._contract.contribute(campaignId,amount,{
+      value: amount.toString()
+    });
+    const resp = await tx.wait();
+    return;
   }
 }

@@ -36,9 +36,9 @@ function App() {
         process.env.REACT_APP_CONTRACT_ADDRESS,
         ContractInfo.abi
       );
-      client.getAllCampaigns().then((campaigns) => {  
-        console.log(campaigns);
-      })
+      // client.getAllCampaigns().then((campaigns) => {  
+      //   console.log(campaigns);
+      // })
     }  
   }, [metaState])
 
