@@ -7,6 +7,8 @@ import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import CreateNewFund from './pages/CreateNewFund';
 import FundDetails from './pages/FundDetails';
+import FundsCreatedByMe from './pages/FundsCreatedByMe';
+import ContributedToFunds from './pages/ContributedToFunds';
 import { useMetamask } from "use-metamask";
 import { ethers } from 'ethers';
 import client from './client';
@@ -52,6 +54,8 @@ function App() {
 
           <Routes>
             <Route exact path='/' element={<LandingPage />}></Route>
+            <Route exact path='/myfunds' element={<FundsCreatedByMe />}></Route>
+            <Route exact path='/mycontributions' element={<ContributedToFunds />}></Route>
             <Route exact path='/fundraiser/new/' element={<CreateNewFund />}></Route>
 
             <Route path='Fundraiser/:id' element={<FundDetails />}></Route>

@@ -113,6 +113,41 @@ const Navbar = () => {
                             </Button>
                         }
 
+                        <Button
+                            display={{ base: "none", md: "flex" }}
+                            fontSize={"md"}
+                            fontWeight={600}
+                            color={"white"}
+                            bg={"teal.400"}
+                            // px={"30em"}
+                            paddingLeft={"20px"}
+                            paddingRight={"20px"}
+                            _hover={{
+                                bg: "teal.300",
+                            }}
+                            variant={"link"}
+                        >
+                            <Link to="/myfunds">My funds</Link>
+                            
+                        </Button>
+
+                        <Button
+                            display={{ base: "none", md: "flex" }}
+                            fontSize={"md"}
+                            fontWeight={600}
+                            color={"white"}
+                            bg={"teal.400"}
+                            // px={"30em"}
+                            paddingLeft={"20px"}
+                            paddingRight={"20px"}
+                            _hover={{
+                                bg: "teal.300",
+                            }}
+                            variant={"link"}
+                        >
+                            <Link to="/mycontributions">My contributions</Link>
+                            
+                        </Button>
 
                         <Button
                             fontSize={"md"}
