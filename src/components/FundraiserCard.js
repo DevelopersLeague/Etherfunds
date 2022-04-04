@@ -11,12 +11,12 @@ import {
     Tooltip,
     Progress,
 } from "@chakra-ui/react";
-
+import { Link } from 'react-router-dom';
 const FundraiserCard = ({ name, description, creatorId, imageURL, id, balance, target, ethPrice }) => {
 
     return (
         // pls add a Navlink component
-        <a href={`/Fundraiser/${id}`}>
+        <Link to={`/Fundraiser/${id}`}>
             <Box
                 bg={useColorModeValue("white", "gray.800")}
                 maxW={{ md: "sm" }}
@@ -138,7 +138,7 @@ const FundraiserCard = ({ name, description, creatorId, imageURL, id, balance, t
                     </Flex>
                 </Box>
             </Box>
-        </a>
+        </Link>
     );
 };
 

@@ -15,42 +15,46 @@ import FundraiserCard from '../components/FundraiserCard';
 import { FcShare, FcDonate, FcMoneyTransfer } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import funds from '../data';
-import useGetAllCampaigns from '../hooks/queries/useGetAllCampaigns';
+// import useGetAllCampaigns from '../hooks/queries/useGetAllCampaigns';
 import styles from '../styles/Home.module.css'
+import useGetContributedTo from '../hooks/queries/useGetContributedTo';
 
 const ContributedToFunds = () => {
-  return (
+    const { isLoading, data: funds } = useGetContributedTo();
+    return (
+        
       <main className={styles.main}>
 
           <Container py={{ base: "4", md: "12" }} maxW={"7xl"}>
               <HStack spacing={2}>
                   <SkeletonCircle size="4" />
                   <Heading as="h2" size="lg">
-                      You have contributed to 5 fundraisers
+                      You have contributed to {isLoading? null: funds.length} fundraisers
                   </Heading>
               </HStack>
 
               <Divider marginTop="4" />
+                {isLoading ? <h2>Loading</h2> :
+                    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={8}>
+                        {funds.map((fund) => {
+                            return (
+                                <div key={fund.id}>
+                                    <FundraiserCard
+                                        name={fund.name}
+                                        description={fund.description}
+                                        creatorId={fund.manager}
+                                        imageURL={"/images/default-campaign-image.jpg"}
+                                        id={"1"}
+                                        // id={fund.id.toString()}
+                                        target={fund.goal.toString()}
+                                        balance={fund.balance.toString()}
+                                        ethPrice="NA"
+                                    />
+                                </div>
+                            );
+                        })}
 
-              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={8}>
-                  {funds.map((fund) => {
-                      return (
-                          <div key={fund.id}>
-                              <FundraiserCard
-                                  name={fund.name}
-                                  description={fund.description}
-                                  creatorId={fund.creatorId}
-                                  imageURL={fund.imageURL}
-                                  id={fund.id}
-                                  target={fund.target}
-                                  balance={fund.balance}
-                                  ethPrice="NA"
-                              />
-                          </div>
-                      );
-                  })}
-
-                  {/* <div>
+                        {/* <div>
                     <FundraiserCard
                         name="test fundname"
                         description="Just testing"
@@ -62,7 +66,8 @@ const ContributedToFunds = () => {
                         ethPrice="10 ETH"
                     />
                 </div> */}
-              </SimpleGrid>
+                </SimpleGrid>
+                }
           </Container>
       </main>
   )

@@ -24,19 +24,34 @@ export class EtherFundClient {
       throw new Error("signer not set call setProvider first");
     }
   }
+  _mapCampaigns(campaigns) {
+    const resp = campaigns.map(campaign => {
+      return {
+        id: campaign[0],
+        manager: campaign[1],
+        name: campaign[2],
+        description: campaign[3],
+        goal: campaign[4],
+        balance: campaign[5],
+        timestamp: campaign[6],
+        contributorCount: campaign[7]
+      }
+    })
+    return resp;
+  }
   async getAllCampaigns() {
     this._validate();
     const campaigns = await this._contract.getAllCampaigns();
-    const resp = campaigns.map(campaign =>{
+    const resp = campaigns.map(campaign => {
       return {
-      id: campaign[0],
-      manager: campaign[1],
-      name: campaign[2],
-      description: campaign[3],
-      goal: campaign[4],
-      balance: campaign[5],
-      timestamp: campaign[6],
-      contributorCount: campaign[7]
+        id: campaign[0],
+        manager: campaign[1],
+        name: campaign[2],
+        description: campaign[3],
+        goal: campaign[4],
+        balance: campaign[5],
+        timestamp: campaign[6],
+        contributorCount: campaign[7]
       }
     })
     return resp;
@@ -60,12 +75,22 @@ export class EtherFundClient {
     }
     return campResp;
   }
-  async contribute({campaignId, amount}){
+  async contribute({ campaignId, amount }) {
     this._validate();
-    const tx = await this._contract.contribute(campaignId,amount,{
+    const tx = await this._contract.contribute(campaignId, amount, {
       value: amount.toString()
     });
     const resp = await tx.wait();
     return;
+  }
+
+  async getCampaignsContributedBySender() {
+    const camps = await this._contract.getCampaignsContributedBySender();
+    return this._mapCampaigns(camps);
+  }
+
+  async getCampaignsCreatedBySender() {
+    const camps = await this._contract.getCampaignsCreatedBySender();
+    return this._mapCampaigns(camps);
   }
 }

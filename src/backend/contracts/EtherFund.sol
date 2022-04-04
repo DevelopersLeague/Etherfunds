@@ -111,6 +111,14 @@ contract EtherFund {
         return _getCampaignsByManagerAddress(_manager);
     }
 
+    function getCampaignsCreatedBySender()
+        public
+        view
+        returns (Campaign[] memory)
+    {
+        return _getCampaignsByManagerAddress(msg.sender);
+    }
+
     // SECTION: Contribute
     function contribute(uint256 _campaignId, uint256 _amount) public payable {
         Campaign storage campaign = campaigns[_campaignId];
