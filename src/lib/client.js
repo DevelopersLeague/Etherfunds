@@ -24,61 +24,59 @@ export class EtherFundClient {
       throw new Error("signer not set call setProvider first");
     }
   }
+
   _mapCampaigns(campaigns) {
-    const resp = campaigns.map(campaign => {
+    const resp = campaigns.map((campaign) => {
       return {
         id: campaign[0],
         manager: campaign[1],
         name: campaign[2],
         description: campaign[3],
-        goal: campaign[4],
-        balance: campaign[5],
+        goal: Number(ethers.utils.formatEther(campaign[4])),
+        balance: Number(ethers.utils.formatEther(campaign[5])),
         timestamp: campaign[6],
-        contributorCount: campaign[7]
-      }
-    })
+        contributorCount: campaign[7],
+      };
+    });
     return resp;
   }
+
+  _mapCampaign(campaign) {
+    return {
+      id: campaign[0],
+      manager: campaign[1],
+      name: campaign[2],
+      description: campaign[3],
+      goal: Number(ethers.utils.formatEther(campaign[4])),
+      balance: Number(ethers.utils.formatEther(campaign[5])),
+      timestamp: campaign[6],
+      contributorCount: campaign[7],
+    };
+  }
+
   async getAllCampaigns() {
     this._validate();
     const campaigns = await this._contract.getAllCampaigns();
-    const resp = campaigns.map(campaign => {
-      return {
-        id: campaign[0],
-        manager: campaign[1],
-        name: campaign[2],
-        description: campaign[3],
-        goal: campaign[4],
-        balance: campaign[5],
-        timestamp: campaign[6],
-        contributorCount: campaign[7]
-      }
-    })
-    return resp;
+    return this._mapCampaigns(campaigns);
   }
+
   async createCampaign({ name, description, goal }) {
     this._validate();
-    const tx = await this._contract.createCampaign(name, description, goal);
+    const goalwei = ethers.utils.parseEther(goal.toString());
+    const tx = await this._contract.createCampaign(name, description, goalwei);
     const resp = await tx.wait();
     const campaign = resp.events.find(
       (e) => e.event === "CampaignCreated"
     ).args;
     // return campaign;
-    const campResp = {
-      id: campaign[0],
-      manager: campaign[1],
-      name: campaign[2],
-      description: campaign[3],
-      goal: campaign[4],
-      balance: campaign[5],
-      timestamp: campaign[6],
-    }
-    return campResp;
+    return this._mapCampaign(campaign);
   }
+
   async contribute({ campaignId, amount }) {
     this._validate();
-    const tx = await this._contract.contribute(campaignId, amount, {
-      value: amount.toString()
+    const wei = ethers.utils.parseEther(amount.toString());
+    const tx = await this._contract.contribute(campaignId, wei, {
+      value: wei.toString(),
     });
     const resp = await tx.wait();
     return;
