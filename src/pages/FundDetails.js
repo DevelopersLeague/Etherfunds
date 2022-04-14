@@ -306,7 +306,7 @@ const FundDetails = () => {
 							p={{ base: 4, sm: 6, md: 8 }}
 							spacing={4}
 						>
-							<a href='' target={"_blank"}>
+							<a href={`/Fundraiser/${id}/withdrawalRequests`}>
 								<Button
 									fontFamily={"heading"}
 									w={"full"}

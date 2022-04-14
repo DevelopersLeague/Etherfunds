@@ -9,6 +9,7 @@ import CreateNewFund from './pages/CreateNewFund';
 import FundDetails from './pages/FundDetails';
 import FundsCreatedByMe from './pages/FundsCreatedByMe';
 import ContributedToFunds from './pages/ContributedToFunds';
+import WithdrawalRequests from './pages/WithdrawalRequests';
 import { useMetamask } from "use-metamask";
 import { ethers } from 'ethers';
 import client from './client';
@@ -59,6 +60,8 @@ function App() {
             <Route exact path='/fundraiser/new/' element={<CreateNewFund />}></Route>
 
             <Route path='Fundraiser/:id' element={<FundDetails />}></Route>
+            <Route path='Fundraiser/:id/withdrawalrequests' element={<WithdrawalRequests />}></Route>
+            {/* <Route path='fundraiser/:id/withdrawalRequest/:id' e></Route> */}
           </Routes>
         </Router>
         
