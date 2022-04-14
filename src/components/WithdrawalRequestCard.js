@@ -50,9 +50,10 @@ const WithdrawalRequestCard = (props) => {
                     >
                         <Tooltip
                             label={"Amount To be Withdrawen by the fundraiser"}
-                            bg={useColorModeValue("white", "gray.700")}
+                            bg={useColorModeValue("black", "teal.500")}
                             placement={"top"}
-                            color={useColorModeValue("gray.800", "white")}
+                            rounded={"lg"}
+                            color={useColorModeValue("white", "white")}
                             fontSize={"1em"}
                         >
                             <Flex justifyContent={"center"}>
@@ -84,10 +85,11 @@ const WithdrawalRequestCard = (props) => {
                         }}
                     >
                         <Tooltip
-                            label={"Wallet Address of the recipient to which the amoount is being transferred"}
-                            bg={useColorModeValue("white", "gray.700")}
+                            label={"Wallet Address of the recipient to which the amoount is being transferred"}                            
+                            bg={useColorModeValue("black", "teal.500")}
                             placement={"top"}
-                            color={useColorModeValue("gray.800", "white")}
+                            rounded={"lg"}
+                            color={useColorModeValue("white", "white")}
                             fontSize={"1em"}
                         >
                             <Flex justifyContent={"start"}>

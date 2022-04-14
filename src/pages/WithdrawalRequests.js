@@ -24,8 +24,7 @@ const WithdrawalRequests = () => {
                         id={1}
                         description={"hello"}
                         amount={100}
-                        numberOfContributors={20}                                                
-                        
+                        numberOfContributors={20}                                                                        
                     />                    
                 </div>
                 <div>
@@ -33,8 +32,7 @@ const WithdrawalRequests = () => {
                         id={1}
                         description={"hello"}
                         amount={100}
-                        numberOfContributors={20}                                                
-                        
+                        numberOfContributors={20}                                                                        
                     />                    
                 </div>                    
                 
