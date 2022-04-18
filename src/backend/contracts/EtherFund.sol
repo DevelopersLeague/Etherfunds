@@ -35,12 +35,13 @@ struct WithdrawRequest {
     uint256 amount;
     uint256 timestamp;
     uint256 approvalCount;
+    uint256 rejectionCount;
 }
 
 contract EtherFund {
     uint256 public nextCampaignId = 1;
     uint256 public nextWithdrawRequestId = 1;
-    uint256 public nextRequestApprovalId = 1;
+    uint256 public nextRequestDecisionId = 1;
     uint256 public nextContributionId = 1;
     uint256[] public campaignIds;
     mapping(uint256 => Campaign) public campaigns;
@@ -281,6 +282,83 @@ contract EtherFund {
         return withdrawRequest;
     }
 
+    function getWithdrawRequestsByCampaignId(uint256 _campaignId)
+        public
+        view
+        returns (WithdrawRequest[] memory)
+    {
+        WithdrawRequest[]
+            memory withdrawRequestsAll = _getAllWithdrawRequests();
+        uint256 count = 0;
+        for (uint256 i = 0; i < withdrawRequestsAll.length; i++) {
+            if (withdrawRequestsAll[i].campaignId == _campaignId) {
+                count++;
+            }
+        }
+        WithdrawRequest[] memory resp = new WithdrawRequest[](count);
+        uint256 j = 0;
+        for (uint256 i = 0; i < withdrawRequestsAll.length; i++) {
+            if (withdrawRequestsAll[i].campaignId == _campaignId) {
+                resp[j++] = withdrawRequestsAll[i];
+            }
+        }
+        return resp;
+    }
+
+    function approveWithdrawRequest(uint256 _withdrawRequestId) public {
+        require(
+            (!_isWithdrawRequestApproved(msg.sender, _withdrawRequestId) &&
+                !_isWithdrawRequestRejected(msg.sender, _withdrawRequestId)),
+            "Request has already been approved or rejected"
+        );
+
+        //create request decision
+        uint256 requestDecisionId = nextRequestDecisionId;
+        nextRequestDecisionId++;
+        requestDecisionIds.push(requestDecisionId);
+        RequestDecision storage requestDecision = requestDecisions[
+            requestDecisionId
+        ];
+        requestDecision.id = requestDecisionId;
+        requestDecision.requestId = _withdrawRequestId;
+        requestDecision.contributorAddress = msg.sender;
+        requestDecision.isApproved = true;
+        //update withdraw request
+        WithdrawRequest storage withdrawRequest = withdrawRequests[
+            _withdrawRequestId
+        ];
+        withdrawRequest.approvalCount++;
+    }
+
+    function rejectWithdrawRequest(uint256 _withdrawRequestId) public {
+        require(
+            (!_isWithdrawRequestApproved(msg.sender, _withdrawRequestId) &&
+                !_isWithdrawRequestRejected(msg.sender, _withdrawRequestId)),
+            "Request has already been approved or rejected"
+        );
+        //create request decision
+        uint256 requestDecisionId = nextRequestDecisionId;
+        nextRequestDecisionId++;
+        requestDecisionIds.push(requestDecisionId);
+        RequestDecision storage requestDecision = requestDecisions[
+            requestDecisionId
+        ];
+        requestDecision.id = requestDecisionId;
+        requestDecision.requestId = _withdrawRequestId;
+        requestDecision.contributorAddress = msg.sender;
+        requestDecision.isApproved = false;
+        //update withdraw request
+        WithdrawRequest storage withdrawRequest = withdrawRequests[
+            _withdrawRequestId
+        ];
+        withdrawRequest.rejectionCount++;
+    }
+
+    // process withdraw request by manager when more than 50% of contributors have approved
+    function processWithdrawRequest(uint256 _id) public {
+        
+    }
+
     //SECTION: private DAO methods
     //SECTION: Campaign DAO
     function _getAllCampaigns() public view returns (Campaign[] memory) {
@@ -467,6 +545,24 @@ contract EtherFund {
     }
 
     // SECTION: Withdraw Request DAO
+    function _getAllWithdrawRequests()
+        private
+        view
+        returns (WithdrawRequest[] memory)
+    {
+        WithdrawRequest[] memory resp = new WithdrawRequest[](
+            withdrawRequestIds.length
+        );
+        uint256 j = 0;
+        for (uint256 i = 0; i < withdrawRequestIds.length; i++) {
+            uint256 id = withdrawRequestIds[i];
+            WithdrawRequest storage withdrawRequest = withdrawRequests[id];
+            resp[j] = withdrawRequest;
+            j++;
+        }
+        return resp;
+    }
+
     function _getWithdrawRequestById(uint256 _withdrawRequestId)
         private
         view
@@ -478,6 +574,24 @@ contract EtherFund {
         return withdrawRequest;
     }
 
+    function _getAllRequestDecisions()
+        private
+        view
+        returns (RequestDecision[] memory)
+    {
+        RequestDecision[] memory resp = new RequestDecision[](
+            requestDecisionIds.length
+        );
+        uint256 j = 0;
+        for (uint256 i = 0; i < requestDecisionIds.length; i++) {
+            uint256 id = requestDecisionIds[i];
+            RequestDecision storage requestDecision = requestDecisions[id];
+            resp[j] = requestDecision;
+            j++;
+        }
+        return resp;
+    }
+
     function _getRequestDecisionById(uint256 _requestDecisionId)
         private
         view
@@ -487,5 +601,45 @@ contract EtherFund {
             _requestDecisionId
         ];
         return requestDecision;
+    }
+
+    function _isWithdrawRequestApproved(address _addr, uint256 _id)
+        private
+        view
+        returns (bool)
+    {
+        RequestDecision storage requestDecision = requestDecisions[0];
+        for (uint256 i = 0; i < requestDecisionIds.length; i++) {
+            uint256 id = requestDecisionIds[i];
+            requestDecision = requestDecisions[id];
+            if (
+                requestDecision.requestId == _id &&
+                requestDecision.isApproved == true &&
+                requestDecision.contributorAddress == _addr
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function _isWithdrawRequestRejected(address _addr, uint256 _id)
+        private
+        view
+        returns (bool)
+    {
+        RequestDecision storage requestDecision = requestDecisions[0];
+        for (uint256 i = 0; i < requestDecisionIds.length; i++) {
+            uint256 id = requestDecisionIds[i];
+            requestDecision = requestDecisions[id];
+            if (
+                requestDecision.requestId == _id &&
+                requestDecision.isApproved == false &&
+                requestDecision.contributorAddress == _addr
+            ) {
+                return true;
+            }
+        }
+        return false;
     }
 }
