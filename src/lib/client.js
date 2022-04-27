@@ -54,6 +54,27 @@ export class EtherFundClient {
     };
   }
 
+  _mapWithdrawRequest(request) {
+    return {
+      id: request[0],
+      campaignId: request[1],
+      beneficiaryAddress: request[2],
+      isProcessed: request[3],
+      description: request[4],
+      amount: Number(ethers.utils.formatEther(request[5])),
+      timestamp: request[6],
+      approvalCount: request[7],
+      rejectionCount: request[8],
+    };
+  }
+
+  _mapWithdrawRequests(requests) {
+    const resp = requests.map((request) => {
+      return this._mapWithdrawRequest(request);
+    });
+    return resp;
+  }
+
   async getAllCampaigns() {
     this._validate();
     const campaigns = await this._contract.getAllCampaigns();
