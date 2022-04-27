@@ -93,6 +93,13 @@ export class EtherFundClient {
     return this._mapCampaign(campaign);
   }
 
+  async createWithdrawalRequest({campaignId, amount, beneficiary, description}){
+    const amountWei = ethers.utils.parseEther(amount.toString());
+    const tx = await this._contract.createWithdrawRequest(campaignId, amount, beneficiary, description);
+    const resp = await tx.wait();
+    return this._mapWithdrawRequest(resp.events[0].args);
+  }
+
   async contribute({ campaignId, amount }) {
     this._validate();
     const wei = ethers.utils.parseEther(amount.toString());
@@ -100,7 +107,12 @@ export class EtherFundClient {
       value: wei.toString(),
     });
     const resp = await tx.wait();
-    return;
+  }
+
+  async withdrawFunds({campaignId, amount, beneficiary}){
+    const amoutWei = ethers.utils.parseEther(amount.toString());
+    const tx = await this._contract.withdrawFunds(campaignId, amoutWei, beneficiary);
+    const resp = await tx.wait();
   }
 
   async getCampaignsContributedBySender() {

@@ -19,7 +19,7 @@ import RequestWithdrawalForm from './pages/RequestWithdrawalForm';
 function App() {
 
   const { connect, metaState } = useMetamask();
-  console.log(metaState);
+  // console.log(metaState);
 
   useEffect(() => {
     if (!metaState.isConnected) {
@@ -61,11 +61,12 @@ function App() {
             <Route exact path='/mycontributions' element={<ContributedToFunds />}></Route>
             <Route exact path='/fundraiser/new/' element={<CreateNewFund />}></Route>
 
-            <Route path='Fundraiser/:id' element={<FundDetails />}></Route>
-            <Route path='Fundraiser/:id/withdrawalrequests' element={<WithdrawalRequests />}></Route>
-            <Route path='Fundraiser/:id/withdrawalrequests/:id' element={<WithdrawalRequestApprove />}></Route>
-            <Route path='/requestwithdrawal/' element={<RequestWithdrawalForm />}></Route>
-            {/* <Route path='/requestwithdrawal/idofrecipientoraddrs' element={<RequestWithdrawal />}></Route> */}
+            <Route path='fundraiser/:id' element={<FundDetails />}></Route>
+            <Route path='fundraiser/:id/withdraw' element={<RequestWithdrawalForm />}></Route>
+            {/* <Route path='Fundraiser/:id/withdrawalrequests' element={<WithdrawalRequests />}></Route> */}
+            {/* <Route path='Fundraiser/:id/withdrawalrequests/:id' element={<WithdrawalRequestApprove />}></Route> */}
+            {/* <Route path='/requestwithdrawal/:id' element={<RequestWithdrawalForm />}></Route> */}
+            {/* <Route path='/Fundraiser/createwithdrawalrequest/:id/' element={<RequestWithdrawalForm />}></Route> */}
           </Routes>
         </Router>
         

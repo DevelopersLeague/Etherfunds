@@ -51,10 +51,11 @@ const FundDetails = () => {
 	const graywhite = useColorModeValue("gray.800", "white")
 	const tealwhite = useColorModeValue("teal.800", "white")
 	const tealteal = useColorModeValue("teal.600", "teal.200")
-	const { mutate, isLoading:isMutationLoading } = useContributeMutation();
+	const { mutate, isLoading: isMutationLoading } = useContributeMutation();
+
 
 	if (isLoading)
-			return <h2>Loading...</h2>
+		return <h2>Loading...</h2>
 
 	const obj = funds.filter((fund) => {
 		// console.log(fund.id, params.id);
@@ -62,10 +63,15 @@ const FundDetails = () => {
 			return fund;
 	})
 	// console.log("Obj:", obj[0]);
-	const { id, balance, name, description, image, goal: target, manager, contributorCount} = obj[0];
-	
+	const { id, balance, name, description, image, goal: target, manager, contributorCount } = obj[0];
+	const account = metaState.account[0]
+	let isManager = false;
+	if(account.toUpperCase() == manager.toUpperCase()){
+		isManager = true;
+	}
+	console.log(isManager)
 	async function onSubmit(data) {
-		console.log("data",typeof(+data.value));
+		console.log("data", typeof (+data.value));
 
 		// submit donation logic goess here
 		// setAmountInRS(null)
@@ -79,7 +85,7 @@ const FundDetails = () => {
 			amount: +data.value,
 		}, {
 			onSuccess: () => {
-				reset({value: ""});
+				reset({ value: "" });
 			}
 		})
 	}
@@ -122,13 +128,13 @@ const FundDetails = () => {
 										"The Fund Creator created the Fund and can create requests to withdraw money."
 									}
 								/>
-								<FundDetailsCard
+								{/* <FundDetailsCard
 									title={"Number of Requests"}
 									stat={"5"}
 									info={
 										"A request tries to withdraw money from the contract. Requests must be approved by contributors"
 									}
-								/>
+								/> */}
 								<FundDetailsCard
 									title={"Number of Contributors"}
 									stat={contributorCount.toString()}
@@ -191,13 +197,13 @@ const FundDetails = () => {
 											color={graygray}
 										>
 											{/* (${getWEIPriceInRS(ETHPrice, balance)}) */}
-											(XXX Rs)
+											{/* (XXX Rs) */}
 										</Text>
 									</Box>
 
 									<Text fontSize={"md"} fontWeight="normal">
-										target of {target.toString()} ETH (Rs
-										{"XXX"})
+										target of {target.toString()} ETH
+										{/* (Rs{"XXX"}) */}
 									</Text>
 									<Progress
 										colorScheme="teal"
@@ -264,67 +270,73 @@ const FundDetails = () => {
 
 									<Stack spacing={10}>
 										{/* Add conditional rendering for when wallet is connected */}
-											<Button
-												fontFamily={"heading"}
-												mt={4}
-												w={"full"}
-												bgGradient="linear(to-r, teal.400,green.400)"
-												color={"white"}
-												_hover={{
-													bgGradient: "linear(to-r, teal.400,blue.400)",
-													boxShadow: "xl",
-												}}
-												isLoading={isMutationLoading}
-												isDisabled={metaState.isConnected ? false : true}
-												type="submit"
-											>
-												
-												Contribute
-											</Button>
-											
+										<Button
+											fontFamily={"heading"}
+											mt={4}
+											w={"full"}
+											bgGradient="linear(to-r, teal.400,green.400)"
+											color={"white"}
+											_hover={{
+												bgGradient: "linear(to-r, teal.400,blue.400)",
+												boxShadow: "xl",
+											}}
+											isLoading={isMutationLoading}
+											isDisabled={metaState.isConnected ? false : true}
+											type="submit"
+										>
+
+											Contribute
+										</Button>
+
 										{
-											metaState.isConnected?null:
-											<Alert status="warning" mt={4}>
-												<AlertIcon />
-												<AlertDescription mr={2}>
-													Please Connect Your Wallet to Contribute
-												</AlertDescription>
-											</Alert>
+											metaState.isConnected ? null :
+												<Alert status="warning" mt={4}>
+													<AlertIcon />
+													<AlertDescription mr={2}>
+														Please Connect Your Wallet to Contribute
+													</AlertDescription>
+												</Alert>
 										}
 
-										
-										
+
+
 									</Stack>
 								</form>
 							</Box>
 						</Stack>
 
-						<Stack
-							bg={whitegray}
-							boxShadow={"lg"}
-							rounded={"xl"}
-							p={{ base: 4, sm: 6, md: 8 }}
-							spacing={4}
-						>
-							<a href={`/Fundraiser/${id}/withdrawalrequests`}>
-								<Button
-									fontFamily={"heading"}
-									w={"full"}
-									bgGradient="linear(to-r, teal.400,green.400)"
-									color={"white"}
-									_hover={{
-										bgGradient: "linear(to-r, teal.400,blue.400)",
-										boxShadow: "xl",
-									}}
-								>
-									View Withdrawal Requests
-								</Button>
-							</a>
-							<Text fontSize={"sm"}>
-								* You can see where these funds are being used & if you have
-								contributed you can also approve those Withdrawal Requests :)
-							</Text>
-						</Stack>
+						{isManager ?
+
+							<Stack
+								bg={whitegray}
+								boxShadow={"lg"}
+								rounded={"xl"}
+								p={{ base: 4, sm: 6, md: 8 }}
+								spacing={4}
+							>
+								<a href={`/fundraiser/${id}/withdraw`}>
+									<Button
+										fontFamily={"heading"}
+										w={"full"}
+										bgGradient="linear(to-r, teal.400,green.400)"
+										color={"white"}
+										_hover={{
+											bgGradient: "linear(to-r, teal.400,blue.400)",
+											boxShadow: "xl",
+										}}
+										// variant={"link"}
+									>
+										
+										Withdraw funds
+									</Button>
+								</a>
+								<Text fontSize={"sm"}>
+									* You can see where these funds are being used & if you have
+									contributed you can also approve those Withdrawal Requests :)
+								</Text>
+							</Stack>
+							: null
+						}
 					</Stack>
 				</Container>
 			</Box>

@@ -23,32 +23,43 @@ import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useMetamask } from "use-metamask";
 import { useNavigate } from "react-router-dom";
-
+import { useParams } from 'react-router-dom';
+// import useCreateWithdrawRequestMutation from '../hooks/mutations/useCreateWithdrawRequestMutation'
+import useWithdrawFundsMutation from '../hooks/mutations/useWithdrawFundsMutation'
 const RequestWithdrawal = () => {
-
+    const params = useParams();
+    const id = params.id;
+    
+    const { mutate, isLoading, data } = useWithdrawFundsMutation();
+    // console.log(data)
     let navigate = useNavigate();
     const { connect, metaState } = useMetamask();
     const { handleSubmit, register, formState: { isSubmitting, errors } } = useForm({
         mode: "onChange"
     })
     const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(0)
+    // const [isLoading, setIsLoading] = useState(0)
     async function onSubmit(data) {
-        console.log(
-        );
-        
+        // campaignId, amount, beneficiary, description
+        const {amount, beneficiary, description} = data;
+        mutate({ campaignId: id, amount, beneficiary}, {
+            onSuccess: () => {
+                navigate(`/fundraiser/${id}/`);
+            }
+        })
     }
+
     return (
         <>
             <main>
                 <Stack spacing={8} mx={"auto"} maxW={"2xl"} py={12} px={6} my={20}>
                     <Text fontSize={"lg"} color={"teal.400"}>
                         <ArrowBackIcon mr={2} />
-                        <Link to="/">Back to all requests</Link>
+                        <Link to={`/fundraiser/${id}`}>Back to fund details</Link>
                     </Text>
 
                     <Stack>
-                        <Heading fontSize={"4xl"}>Withdrawal Request for {"XX"} fund</Heading>
+                        <Heading fontSize={"4xl"}>Withdrawal Request for fund</Heading>
                     </Stack>
 
                     <Box
@@ -60,18 +71,26 @@ const RequestWithdrawal = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Stack spacing={4}>
 
-                                <FormControl id="description">
+                                {/* <FormControl id="description">
                                     <FormLabel>Description</FormLabel>
                                     <Textarea
                                         {...register("description", { required: true })}
                                         isDisabled={isSubmitting}
                                     />
-                                </FormControl>
+                                </FormControl> */}
 
                                 <FormControl id="amount">
                                     <FormLabel>Amount in ETH to be withdrawn</FormLabel>
                                     <Input
                                         {...register("amount", { required: true })}
+                                        isDisabled={isSubmitting}
+                                    />
+                                </FormControl>
+
+                                <FormControl id="beneficiary">
+                                    <FormLabel>Benificiary address</FormLabel>
+                                    <Input
+                                        {...register("beneficiary", { required: true })}
                                         isDisabled={isSubmitting}
                                     />
                                 </FormControl>

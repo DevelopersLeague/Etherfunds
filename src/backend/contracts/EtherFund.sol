@@ -125,11 +125,8 @@ contract EtherFund {
 
     // SECTION: Contribute
     function contribute(uint256 _campaignId, uint256 _amount) public payable {
+        console.log(address(this).balance);
         Campaign storage campaign = campaigns[_campaignId];
-        require(
-            msg.sender != campaign.manager,
-            "Cannot contribute to own campaign"
-        );
         require(_amount >= 0, "Amount must be greater than 0");
         require(_amount == msg.value, "Amount must be equal to msg.value");
         bool alreadyContributed = _hasUserContributedToCampaign(
@@ -228,11 +225,32 @@ contract EtherFund {
         uint256 id,
         uint256 campaignId,
         address beneficiaryAddress,
+        bool isProcessed,
         string description,
         uint256 amount,
         uint256 timestamp,
-        uint256 approvalCount
+        uint256 approvalCount,
+        uint256 rejectionCount
     );
+
+    function withdrawFunds(
+        uint256 _campaignId,
+        uint256 amount,
+        address payable _beneficiary
+    ) public {
+        Campaign memory campaign = _getCampaignById(_campaignId);
+        require(
+            campaign.manager == msg.sender,
+            "Only campaign manager can withdraw funds"
+        );
+        require(
+            campaign.balance >= amount,
+            "Cannot withdraw more funds than campaign balance"
+        );
+        campaign.balance -= amount;
+        _beneficiary.transfer(amount);
+        campaigns[_campaignId] = campaign;
+    }
 
     function createWithdrawRequest(
         uint256 _campaignId,
@@ -267,10 +285,12 @@ contract EtherFund {
             withdrawRequest.id,
             withdrawRequest.campaignId,
             withdrawRequest.beneficiaryAddress,
+            withdrawRequest.isProcessed,
             withdrawRequest.description,
             withdrawRequest.amount,
             withdrawRequest.timestamp,
-            withdrawRequest.approvalCount
+            withdrawRequest.approvalCount,
+            withdrawRequest.rejectionCount
         );
     }
 

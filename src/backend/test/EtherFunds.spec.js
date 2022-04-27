@@ -63,7 +63,7 @@ describe("Etherfunds", () => {
   });
 
   describe("contribute", async () => {
-    it("should increase contract balance when contributed", async () => {
+    it.only("should increase contract balance when contributed", async () => {
       let owner = addresses[1];
       let user = addresses[2];
       const provider = waffle.provider;
@@ -473,6 +473,27 @@ describe("Etherfunds", () => {
       expect(withdrawRequests[0].description).to.equal("test description 2");
     });
   });
+  describe("withdrawFunds", () => {
+    it.only("should withdraw funds", async () => {
+      //setup
+      let owner = addresses[1];
+      let user = addresses[2];
+      const tx = await etherFund
+        .connect(owner)
+        .createCampaign("test22", "test22", 100);
+      const resp = await tx.wait();
+      const id = resp.events[0].args.id;
+      const campaign = resp.events[0].args;
+      console.log("user-balance: ", await user.getBalance())
+      await etherFund.connect(user).contribute(id, 100, {
+        value: "100",
+      });
+      console.log("user-balance: ", await user.getBalance())
+      //action
+      let tx5 = await etherFund.connect(owner).withdrawFunds(campaign.id, 10, user.address);
+      console.log("user-balance: ", await user.getBalance())
+    });
+  })
 });
 
 async function sleep(ms) {

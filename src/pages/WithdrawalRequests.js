@@ -4,8 +4,13 @@ import { Link } from 'react-router-dom';
 import { BellIcon } from '@chakra-ui/icons';
 import styles from '../styles/Home.module.css'
 import WithdrawalRequestCard from '../components/WithdrawalRequestCard';
+import { useParams } from 'react-router-dom';
 
 const WithdrawalRequests = () => {
+
+    const params = useParams();
+    const id = params.id;
+    
     return <div>
         <main className={styles.main}>
             <Container py={{ base: "4", md: "0" }} maxW={"7xl"} align={"left"}>
@@ -33,7 +38,7 @@ const WithdrawalRequests = () => {
                         type="submit"
                         // variant={"link"}
                     >
-                        <Link to="/requestwithdrawal">
+                        <Link to={`/Fundraiser/createwithdrawalrequest/${id}/`}>
                             Create a withdrawal request
                         </Link>
                     </Button>
