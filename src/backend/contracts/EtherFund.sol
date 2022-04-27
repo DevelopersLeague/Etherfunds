@@ -1,5 +1,7 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
+//import hardhat console.log
+import "hardhat/console.sol";
 
 struct Campaign {
     uint256 id;
@@ -30,7 +32,8 @@ struct RequestDecision {
 struct WithdrawRequest {
     uint256 id;
     uint256 campaignId;
-    address beneficiaryAddress;
+    address payable beneficiaryAddress;
+    bool isProcessed;
     string description;
     uint256 amount;
     uint256 timestamp;
@@ -234,7 +237,7 @@ contract EtherFund {
     function createWithdrawRequest(
         uint256 _campaignId,
         uint256 _amount,
-        address _beneficiary,
+        address payable _beneficiary,
         string memory _description
     ) public {
         Campaign storage campaign = campaigns[_campaignId];
@@ -305,6 +308,39 @@ contract EtherFund {
         return resp;
     }
 
+    function getPendingWithdrawRequestsByCampaignId(uint256 _campaignId)
+        public
+        view
+        returns (WithdrawRequest[] memory)
+    {
+        //find all withdraw requests with given _campaignId
+        WithdrawRequest[] memory requests = getWithdrawRequestsByCampaignId(
+            _campaignId
+        );
+        // find all withdraw requests not approved or rejected by sender
+        uint256 count = 0;
+        for (uint256 i = 0; i < requests.length; i++) {
+            if (
+                !_isWithdrawRequestApproved(msg.sender, requests[i].id) &&
+                !_isWithdrawRequestRejected(msg.sender, requests[i].id)
+            ) {
+                count++;
+            }
+        }
+        WithdrawRequest[] memory resp = new WithdrawRequest[](count);
+        uint256 j = 0;
+        for (uint256 i = 0; i < requests.length; i++) {
+            if (
+                !_isWithdrawRequestApproved(msg.sender, requests[i].id) &&
+                !_isWithdrawRequestRejected(msg.sender, requests[i].id)
+            ) {
+                resp[j] = requests[i];
+                j++;
+            }
+        }
+        return resp;
+    }
+
     function approveWithdrawRequest(uint256 _withdrawRequestId) public {
         require(
             (!_isWithdrawRequestApproved(msg.sender, _withdrawRequestId) &&
@@ -356,7 +392,42 @@ contract EtherFund {
 
     // process withdraw request by manager when more than 50% of contributors have approved
     function processWithdrawRequest(uint256 _id) public {
-        
+        // only managers can approve withdraw requests
+        WithdrawRequest storage withdrawRequest = withdrawRequests[_id];
+        require(
+            msg.sender == campaigns[withdrawRequest.campaignId].manager,
+            "Only campaign manager can process withdraw request"
+        );
+        WithdrawRequest memory request = _getWithdrawRequestById(_id);
+        uint256 campaignId = request.campaignId;
+        Campaign memory campaign = _getCampaignById(campaignId);
+        uint256 required = campaign.contributorCount / 2;
+        require(
+            request.approvalCount >= required,
+            "Not enough contributors have approved"
+        );
+        require(
+            request.amount <= campaign.balance,
+            "Amount must be less than or equal to campaign balance"
+        );
+        //transer money to benificiery
+        campaign.balance -= request.amount;
+        _transfer(request.beneficiaryAddress, request.amount);
+        //update withdraw request
+        request.isProcessed = true;
+        //update campaign
+        campaigns[campaignId] = campaign;
+        withdrawRequests[_id] = request;
+    }
+
+    function isWithdrawRequestApproved(uint256 _id) public view returns (bool) {
+        return _isWithdrawRequestApproved(msg.sender, _id);
+    }
+
+    function _transfer(address payable benificiary, uint256 amount) private {
+        require(benificiary != address(0), "Beneficiary address cannot be 0x0");
+        require(amount > 0, "Amount must be greater than 0");
+        benificiary.transfer(amount);
     }
 
     //SECTION: private DAO methods

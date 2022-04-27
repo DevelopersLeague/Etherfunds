@@ -207,6 +207,7 @@ describe("Etherfunds", () => {
       expect(campaigns.length).to.equal(1);
     });
   });
+
   describe("createWithdrawRequest", async () => {
     it("should create withdraw request", async () => {
       //setup
@@ -233,6 +234,7 @@ describe("Etherfunds", () => {
       expect(request.description).to.equal("test description");
     });
   });
+
   describe("getWithdrawRequestById", async () => {
     it("should get withdraw request by id", async () => {
       //setup
@@ -258,6 +260,217 @@ describe("Etherfunds", () => {
       expect(withdrawRequest.amount.toString()).to.equal("50");
       expect(withdrawRequest.beneficiaryAddress).to.equal(user.address);
       expect(withdrawRequest.description).to.equal("test description");
+    });
+  });
+
+  describe("getWithdrawRequestsByCampaignId", async () => {
+    it("should get withdraw requests by campaign id", async () => {
+      //setup
+      let owner = addresses[1];
+      let user = addresses[2];
+      const tx = await etherFund
+        .connect(owner)
+        .createCampaign("test16", "test16", 100);
+      const resp = await tx.wait();
+      const id = resp.events[0].args.id;
+      await etherFund.connect(user).contribute(id, 100, {
+        value: "100",
+      });
+      //action
+      let tx2 = await etherFund
+        .connect(owner)
+        .createWithdrawRequest(id, 50, user.address, "test description 1");
+      let resp2 = await tx2.wait();
+      let request = resp2.events[0].args;
+      let tx3 = await etherFund
+        .connect(owner)
+        .createWithdrawRequest(id, 60, user.address, "test description 2");
+      let resp3 = await tx3.wait();
+      let request2 = resp3.events[0].args;
+      //assertion
+      let withdrawRequests = await etherFund.getWithdrawRequestsByCampaignId(
+        id
+      );
+      expect(withdrawRequests.length).to.equal(2);
+      expect(withdrawRequests[0].amount.toString()).to.equal("50");
+      expect(withdrawRequests[0].beneficiaryAddress).to.equal(user.address);
+      expect(withdrawRequests[0].description).to.equal("test description 1");
+      expect(withdrawRequests[1].amount.toString()).to.equal("60");
+      expect(withdrawRequests[1].beneficiaryAddress).to.equal(user.address);
+      expect(withdrawRequests[1].description).to.equal("test description 2");
+    });
+  });
+  describe("approveWithdrawRequest", async () => {
+    it("should approve withdraw request", async () => {
+      //setup
+      let owner = addresses[1];
+      let user = addresses[2];
+      const tx = await etherFund
+        .connect(owner)
+        .createCampaign("test17", "test17", 100);
+      const resp = await tx.wait();
+      const id = resp.events[0].args.id;
+      await etherFund.connect(user).contribute(id, 100, {
+        value: "100",
+      });
+      //action
+      let tx2 = await etherFund
+        .connect(owner)
+        .createWithdrawRequest(id, 50, user.address, "test description");
+      let resp2 = await tx2.wait();
+      let request = resp2.events[0].args;
+      let tx3 = await etherFund
+        .connect(user)
+        .approveWithdrawRequest(request.id);
+      let resp3 = await tx3.wait();
+      //assertion
+      let withdrawRequest = await etherFund.getWithdrawRequestById(request.id);
+      expect(withdrawRequest.id.toString()).to.equal("1");
+      expect(withdrawRequest.amount.toString()).to.equal("50");
+      expect(withdrawRequest.beneficiaryAddress).to.equal(user.address);
+      expect(withdrawRequest.description).to.equal("test description");
+      expect(withdrawRequest.approvalCount).to.equal(1);
+    });
+  });
+  describe("rejectWithdrawRequest", async () => {
+    it("should reject withdraw request", async () => {
+      //setup
+      let owner = addresses[1];
+      let user = addresses[2];
+      const tx = await etherFund
+        .connect(owner)
+        .createCampaign("test18", "test18", 100);
+      const resp = await tx.wait();
+      const id = resp.events[0].args.id;
+      await etherFund.connect(user).contribute(id, 100, {
+        value: "100",
+      });
+      //action
+      let tx2 = await etherFund
+        .connect(owner)
+        .createWithdrawRequest(id, 50, user.address, "test description");
+      let resp2 = await tx2.wait();
+      let request = resp2.events[0].args;
+      let tx3 = await etherFund.connect(user).rejectWithdrawRequest(request.id);
+      let resp3 = await tx3.wait();
+      //assertion
+      let withdrawRequest = await etherFund.getWithdrawRequestById(request.id);
+      expect(withdrawRequest.id.toString()).to.equal("1");
+      expect(withdrawRequest.amount.toString()).to.equal("50");
+      expect(withdrawRequest.beneficiaryAddress).to.equal(user.address);
+      expect(withdrawRequest.description).to.equal("test description");
+      expect(withdrawRequest.approvalCount).to.equal(0);
+      expect(withdrawRequest.rejectionCount).to.equal(1);
+    });
+  });
+
+  describe("processWithdrawRequest", async () => {
+    it("should process withdraw request", async () => {
+      //setup
+      let owner = addresses[1];
+      let user = addresses[2];
+      const tx = await etherFund
+        .connect(owner)
+        .createCampaign("test19", "test19", 100);
+      const resp = await tx.wait();
+      const id = resp.events[0].args.id;
+      await etherFund.connect(user).contribute(id, 100, {
+        value: "100",
+      });
+      //action
+      let tx2 = await etherFund
+        .connect(owner)
+        .createWithdrawRequest(id, 50, user.address, "test description");
+      let resp2 = await tx2.wait();
+      let request = resp2.events[0].args;
+      let tx3 = await etherFund
+        .connect(user)
+        .approveWithdrawRequest(request.id);
+      let resp3 = await tx3.wait();
+      let tx4 = await etherFund
+        .connect(owner)
+        .processWithdrawRequest(request.id);
+      let resp4 = await tx4.wait();
+      // see if campaign balace is updated
+      let campaign = await etherFund.getCampaignById(id);
+      expect(campaign.balance.toString()).to.equal("50");
+      //assertion
+      let withdrawRequest = await etherFund.getWithdrawRequestById(request.id);
+      expect(withdrawRequest.id.toString()).to.equal("1");
+      expect(withdrawRequest.amount.toString()).to.equal("50");
+      expect(withdrawRequest.beneficiaryAddress).to.equal(user.address);
+      expect(withdrawRequest.description).to.equal("test description");
+      expect(withdrawRequest.approvalCount).to.equal(1);
+      expect(withdrawRequest.rejectionCount).to.equal(0);
+      expect(withdrawRequest.isProcessed).to.equal(true);
+    });
+  });
+
+  describe("isWithdrawRequestApproved", () => {
+    it("should return true if withdraw request is approved", async () => {
+      //setup
+      let owner = addresses[1];
+      let user = addresses[2];
+      const tx = await etherFund
+        .connect(owner)
+        .createCampaign("test20", "test20", 100);
+      const resp = await tx.wait();
+      const id = resp.events[0].args.id;
+      await etherFund.connect(user).contribute(id, 100, {
+        value: "100",
+      });
+      //action
+      let tx2 = await etherFund
+        .connect(owner)
+        .createWithdrawRequest(id, 50, user.address, "test description");
+      let resp2 = await tx2.wait();
+      let request = resp2.events[0].args;
+      let tx3 = await etherFund
+        .connect(user)
+        .approveWithdrawRequest(request.id);
+      let resp3 = await tx3.wait();
+      //assertion
+      let isApproved = await etherFund
+        .connect(user)
+        .isWithdrawRequestApproved(request.id);
+      expect(isApproved).to.equal(true);
+    });
+  });
+
+  describe("getPendingWithdrawRequestsByCampaignId", () => {
+    it("should return pending withdraw requests by campaign id", async () => {
+      //setup
+      let owner = addresses[1];
+      let user = addresses[2];
+      const tx = await etherFund
+        .connect(owner)
+        .createCampaign("test21", "test21", 100);
+      const resp = await tx.wait();
+      const id = resp.events[0].args.id;
+      await etherFund.connect(user).contribute(id, 100, {
+        value: "100",
+      });
+      //action
+      let tx2 = await etherFund
+        .connect(owner)
+        .createWithdrawRequest(id, 50, user.address, "test description1");
+      let resp2 = await tx2.wait();
+      let request = resp2.events[0].args;
+      let tx3 = await etherFund
+        .connect(owner)
+        .createWithdrawRequest(id, 50, user.address, "test description 2");
+      let resp3 = await tx2.wait();
+      let request2 = resp2.events[0].args;
+      let tx4 = await etherFund
+        .connect(user)
+        .approveWithdrawRequest(request.id);
+      let resp4 = await tx3.wait();
+      //assertion
+      let withdrawRequests = await etherFund
+        .connect(user)
+        .getPendingWithdrawRequestsByCampaignId(id);
+      expect(withdrawRequests.length).to.equal(1);
+      expect(withdrawRequests[0].description).to.equal("test description 2");
     });
   });
 });
