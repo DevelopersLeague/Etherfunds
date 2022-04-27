@@ -15,6 +15,7 @@ import { useMetamask } from "use-metamask";
 import { ethers } from 'ethers';
 import client from './client';
 import ContractInfo from './backend/artifacts/contracts/EtherFund.sol/EtherFund.json'
+import RequestWithdrawalForm from './pages/RequestWithdrawalForm';
 function App() {
 
   const { connect, metaState } = useMetamask();
@@ -63,6 +64,8 @@ function App() {
             <Route path='Fundraiser/:id' element={<FundDetails />}></Route>
             <Route path='Fundraiser/:id/withdrawalrequests' element={<WithdrawalRequests />}></Route>
             <Route path='Fundraiser/:id/withdrawalrequests/:id' element={<WithdrawalRequestApprove />}></Route>
+            <Route path='/requestwithdrawal/' element={<RequestWithdrawalForm />}></Route>
+            {/* <Route path='/requestwithdrawal/idofrecipientoraddrs' element={<RequestWithdrawal />}></Route> */}
           </Routes>
         </Router>
         
