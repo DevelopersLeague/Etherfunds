@@ -149,14 +149,14 @@ const Navbar = () => {
                             
                         </Button>
 
-                        <Button
+                        {/* <Button
                             fontSize={"md"}
                             fontWeight={600}
                             variant={"link"}
                             display={{ base: "none", md: "inline-flex" }}
                         >
                             <a href="/#howitworks"> How it Works</a>
-                        </Button>
+                        </Button> */}
 
                         <DarkModeSwitch />
                     </Stack>
