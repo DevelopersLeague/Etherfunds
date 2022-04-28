@@ -73,7 +73,7 @@ const LandingPage = () => {
                                             description={fund.description}
                                             creatorId={fund.manager}
                                             imageURL={"/images/default-campaign-image.jpg"}
-                                            id={"1"}
+                                            id={fund.id}
                                             // id={fund.id.toString()}
                                             target={fund.goal.toString()}
                                             balance={fund.balance.toString()}
