@@ -99,7 +99,7 @@ const LandingPage = () => {
                 }
             </Container>
 
-            <Container py={{ base: "4", md: "12" }} maxW={"7xl"} id="howitworks">
+            {/* <Container py={{ base: "4", md: "12" }} maxW={"7xl"} id="howitworks">
                 <HStack spacing={2}>
                     <SkeletonCircle size="4" />
                     <Heading as="h2" size="lg">
@@ -131,7 +131,7 @@ const LandingPage = () => {
                     />
                 </SimpleGrid>
 
-            </Container>
+            </Container> */}
         </main>
     </div>;
 };
