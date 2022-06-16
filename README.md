@@ -14,7 +14,7 @@
   <a href="#table-of-content"><b>Explore the docs »</b></a>
   <br />
   <br />
-  <a href="#architecture-and-design">Architecture</a>
+  <a href="#architecture">Architecture</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#demonstration">Features</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
@@ -67,7 +67,7 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 
 - The block diagram shows the overview of the system.
 <br />
-<img src="./images/architecture.svg" />
+<img src="./docs/block_digram_svg.svg" />
 <br />
 
 ### Use-case diagram
