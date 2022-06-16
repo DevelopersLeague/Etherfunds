@@ -16,9 +16,9 @@
   <br />
   <a href="#architecture">Architecture</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="#demonstration">Features</a>
+  <a href="#pages">Pages</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="#contributing">Local Setup</a>
+  <a href="#local-setup">Local Setup</a>
   <br />
 </p>
 
