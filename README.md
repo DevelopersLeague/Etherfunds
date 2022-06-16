@@ -68,6 +68,8 @@ Our PS poses to develop an application that can automate transactions in a secur
 
 2) What if owner is a NGO and then they distribute money to management as well as to the cause, but they majorly used their funds for management, can you do something about it? 
 
+one of the probable ans Ans:
+A safety and trust team could be created to verify personal information, the identity of recipients, and they make sure that all funds raised on Etherfunds are going to the right place. They work closely with state and local officials and law enforcement to assist in any investigations.
 
 ## Architecture 
 
