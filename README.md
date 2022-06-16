@@ -94,7 +94,7 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 
 <br />
 
-# instructions to start the project
+## Local Setup
 
 1. clone the project to your local environment
 2. make sure you have node.js version ^14.19.0
