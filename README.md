@@ -78,6 +78,10 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 
 - ER diagram shows the databases involved
 
+<br />
+<img src="./docs/er_diagram.svg" width="90%"/>
+<br />
+
 ## Pages
 
 ## Technologies Used
