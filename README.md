@@ -22,6 +22,21 @@
   <br />
 </p>
 
+<br />
+
+**Demo Video will be added here**
+
+### Table Of Content
+
+- [Architecture](#architecture-and-design)
+- [Demonstration & Features](#demonstration)
+- [Technologies Used](#technologies-used)
+- [Local Setup](#localsetup)
+- [License](#license-)
+- [Authors](#authors)
+
+<br />
+
 # instructions to start the project
 
 1. clone the project to your local environment
