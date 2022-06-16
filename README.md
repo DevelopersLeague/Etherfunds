@@ -2,7 +2,7 @@
 
 <p align="center">
     <img src="public/logo192.png" width="80" height="80"/>
-    <img src="public/logo192.png" width="80" height="80"/>
+    <img src="public/Ethereum.svg" width="80" height="80"/>
 </p>
 
 <h2 align="center">Etherfunds</h2>
