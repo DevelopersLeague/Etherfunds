@@ -49,6 +49,7 @@ Enter blockchain technology, an immutable ledger where every record can be trace
 Let's explore the core problems of existing fundraising platforms
 - When supporting a nonprofit is merely a click away, we may accidentally end up funding fraudulent campaigns resulting in [news like these](https://www.justice.gov/usao-ndga/pr/operator-bogus-charity-sentenced-defrauding-multiple-companies).
 - Even with legitimate charitable organizations, some of these charities only allocate a small portion of their donations to the actual cause and the remaining goes to corporate sponsors and private operators.
+- Tampering of transactions
 
 Our PS poses to develop an application that can automate transactions in a secured way and some more falana.
 
