@@ -37,6 +37,21 @@
 
 <br />
 
+### Problem we are trying to solve?
+
+Falana line 1
+<br />
+Falana line 2
+<br />
+
+**Problems with the exisiting sytem?**
+
+Falana line
+- Problem 1
+- Problem 2
+
+Our PS poses to develop an application that can automate transactions in a secured way and some more falana.
+
 # instructions to start the project
 
 1. clone the project to your local environment
