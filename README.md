@@ -46,11 +46,28 @@ Enter blockchain technology, an immutable ledger where every record can be trace
 
 **Problems with the exisiting sytem?**
 
-Falana line
-- Problem 1
-- Problem 2
+Let's explore the core problems of existing fundraising platforms
+- When supporting a nonprofit is merely a click away, we may accidentally end up funding fraudulent campaigns resulting in [news like these](https://www.justice.gov/usao-ndga/pr/operator-bogus-charity-sentenced-defrauding-multiple-companies).
+- Even with legitimate charitable organizations, some of these charities only allocate a small portion of their donations to the actual cause and the remaining goes to corporate sponsors and private operators.
 
 Our PS poses to develop an application that can automate transactions in a secured way and some more falana.
+
+**Why Blockchain?**
+
+**Why only Ethereum Blockchain**
+<br />
+- The currency of Ethereum network is Ether which is a well established cryptocurrency. These days there are many new cryptocurrencies Scam Initial Coin Offerings(ICO) are completely fabricated, with fake bios of nonexistent team members and technical whitepapers
+- The community of developers which would help us in bug resolution
+
+**Main Unsolved Question**
+<br />
+
+1) What if owner of fund is not a legitimte person and uses the fund for his own benefits after withdrawal.
+- The current sol will offer immutablility of transactions and peer-to-peer will help eliminating distribution of money among middle men 
+- A counter thought would be to have sepearte admin interface which stores the personal details of fund creator along with their wallet address 
+
+2) What if owner is a NGO and then they distribute money to management as well as to the cause, but they majorly used their funds for management, can you do something about it? 
+
 
 ## Architecture 
 
@@ -94,7 +111,9 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
   - React.js and related packages
   - CSS and related packages
 - Blockchain network: Ethereum
+- Smart contracts are written in **Solidity** programming language
 - Smart contracts compilation and deployment to test network was done using **Hardhat**
+- Blockchain wallet used: **MetaMask** 
 
 <br />
 
