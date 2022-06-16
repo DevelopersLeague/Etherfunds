@@ -31,7 +31,7 @@
 - [Architecture](#architecture-and-design)
 - [Pages and description](#pages)
 - [Technologies Used](#technologies-used)
-- [Local Setup](#localsetup)
+- [Local Setup](#local-setup)
 - [License](#license-)
 - [Authors](#authors)
 
@@ -94,7 +94,7 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 
 <br />
 
-## Local Setup
+## Local-Setup
 
 1. clone the project to your local environment
 2. make sure you have node.js version ^14.19.0
