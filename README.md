@@ -52,6 +52,32 @@ Falana line
 
 Our PS poses to develop an application that can automate transactions in a secured way and some more falana.
 
+## Architecture 
+
+We tried to follow ideal Software Development Design Principles such as.
+- Do not repeat yourself (DRY)
+- Keep it short and simple (KISS)
+- You Ain’t Gonna Need It (YAGNI)
+
+<br />
+
+The presentation for Etherfunds can be found [here](https://www.canva.com/design/DAE3pEWUc1Y/Lrnk-dxztwBzIL4UkxrQvg/view#1).
+
+### Block diagram
+
+- The block diagram shows the overview of the system.
+<br />
+<img src="./images/architecture.svg" />
+<br />
+
+### Use-case diagram
+
+- The use case shows the workflow in detail
+
+### E-R diagram
+
+- ER diagram shows the databases involved
+
 # instructions to start the project
 
 1. clone the project to your local environment
