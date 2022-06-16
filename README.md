@@ -29,7 +29,7 @@
 ### Table Of Content
 
 - [Architecture](#architecture-and-design)
-- [Features](#features)
+- [Pages and description](#pages)
 - [Technologies Used](#technologies-used)
 - [Local Setup](#localsetup)
 - [License](#license-)
@@ -77,6 +77,22 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 ### E-R diagram
 
 - ER diagram shows the databases involved
+
+## Pages
+
+## Technologies Used
+
+<br />
+
+- Workflow and Architecture Design
+  - Excalidraw | Draw.io
+- Frontend
+  - React.js and related packages
+  - CSS and related packages
+- Blockchain network: Ethereum
+- Smart contracts compilation and deployment to test network was done using **Hardhat**
+
+<br />
 
 # instructions to start the project
 
