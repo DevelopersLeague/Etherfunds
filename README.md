@@ -29,7 +29,7 @@
 ### Table Of Content
 
 - [Architecture](#architecture-and-design)
-- [Demonstration & Features](#demonstration)
+- [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Local Setup](#localsetup)
 - [License](#license-)
