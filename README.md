@@ -39,9 +39,9 @@
 
 ### Problem we are trying to solve?
 
-Falana line 1
+When deciding about donating funds to charitable causes, many will wonder whether or not their contribution will have an impact. Quite a lot of nonprofit organizations have shaken people’s trust in philanthropy and made them question the credibility of charity initiatives by engaging in shady schemes to extract more revenue. Transparency is one of the key issues in today’s philanthropic world.
 <br />
-Falana line 2
+Enter blockchain technology, an immutable ledger where every record can be traced to its creation. Decentralized and distributed among its users, blockchain allows them to track transactions and be sure of the absence of fraudulent activities.
 <br />
 
 **Problems with the exisiting sytem?**
