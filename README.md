@@ -1,3 +1,27 @@
+<br />
+
+<p align="center">
+    <img src="public/logo192.png" width="80" height="80"/>
+    <img src="public/logo192.png" width="80" height="80"/>
+</p>
+
+<h2 align="center">Etherfunds</h2>
+
+<p align="center">
+  Blockchain based Fundraising platform, that eliminates middlemen while maintaining the integrity of the entire process.
+  <br />
+  <br />
+  <a href="#table-of-content"><b>Explore the docs »</b></a>
+  <br />
+  <br />
+  <a href="#architecture-and-design">Architecture</a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#demonstration">Features</a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#contributing">Local Setup</a>
+  <br />
+</p>
+
 # instructions to start the project
 
 1. clone the project to your local environment
