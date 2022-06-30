@@ -8,7 +8,7 @@
 <h2 align="center">Etherfunds</h2>
 
 <p align="center">
-  Blockchain based Fundraising platform, that eliminates middlemen while maintaining the integrity of the entire process.
+  Blockchain based Fundraising platform, that eliminates middlemen while improving the integrity of the entire process.
   <br />
   <br />
   <a href="#table-of-content"><b>Explore the docs »</b></a>
@@ -51,27 +51,30 @@ Let's explore the core problems of existing fundraising platforms
 - Even with legitimate charitable organizations, some of these charities only allocate a small portion of their donations to the actual cause and the remaining goes to corporate sponsors and private operators.
 - Tampering of transactions
 
-Our PS poses to develop an application that can automate transactions in a secured way and some more falana.
+Our PS poses offer immutablility of transactions and peer-to-peer will help eliminating distribution of money among middle men.
 
-**Why Blockchain?**
 
 **Why only Ethereum Blockchain**
 <br />
 - The currency of Ethereum network is Ether which is a well established cryptocurrency. These days there are many new cryptocurrencies Scam Initial Coin Offerings(ICO) are completely fabricated, with fake bios of nonexistent team members and technical whitepapers
 - The community of developers which would help us in bug resolution
 
-**Main Unsolved Question**
+**Some Follow-ups**
 <br />
 
 1) What if owner of fund is not a legitimte person and uses the fund for his own benefits after withdrawal.
-- The current sol will offer immutablility of transactions and peer-to-peer will help eliminating distribution of money among middle men 
-- A counter thought would be to have sepearte admin interface which stores the personal details of fund creator along with their wallet address 
+<br/>
+Ans: A safety and trust team could be created to verify personal information, the identity of recipients, and they make sure that all funds raised on Etherfunds are going to the right place. They work closely with state and local officials and law enforcement to assist in any investigations.
+<br>
+The goal is to automate the process with least human interactions therby eliminating any chances of malpractice during transaction and establishing a P2P network
+
 
 2) What if owner is a NGO and then they distribute money to management as well as to the cause, but they majorly used their funds for management, can you do something about it? 
 
-one of the probable ans: <br />
-A safety and trust team could be created to verify personal information, the identity of recipients, and they make sure that all funds raised on Etherfunds are going to the right place. They work closely with state and local officials and law enforcement to assist in any investigations.
-The goal is to automate the process with least human interactions therby eliminating any chances of malpractice during transaction and establishing a P2P network
+<br/>
+Ans: same as above
+
+<br />
 
 ## Architecture 
 
@@ -90,10 +93,6 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 <br />
 <img src="./docs/block_digram_svg.svg" />
 <br />
-
-### Use-case diagram
-
-- The use case shows the workflow in detail
 
 ### E-R diagram
 
