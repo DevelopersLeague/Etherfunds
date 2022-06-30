@@ -13,7 +13,7 @@ import {
     HStack,
 } from "@chakra-ui/react";
 import FundraiserCard from '../components/FundraiserCard';
-import { FcShare, FcDonate, FcMoneyTransfer } from "react-icons/fc";
+import { FcDonate, FcManager, FcFlashOn } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import funds from '../data';
 import useGetAllCampaigns from '../hooks/queries/useGetAllCampaigns';
@@ -34,7 +34,7 @@ const LandingPage = () => {
                     as="h1"
                     py={4}
                 >
-                    Crowdfunding using the powers of <br /> Crypto & Blockchain 😄{" "}
+                    A modern way of Fundraising using<br /> Ethereum Blockchain ✨{" "}
                 </Heading>
 
                 {/* Navlink will come here */}
@@ -99,39 +99,38 @@ const LandingPage = () => {
                 }
             </Container>
 
-            {/* <Container py={{ base: "4", md: "12" }} maxW={"7xl"} id="howitworks">
+            <Container py={{ base: "4", md: "12" }} maxW={"7xl"} id="howitworks">
                 <HStack spacing={2}>
                     <SkeletonCircle size="4" />
                     <Heading as="h2" size="lg">
-                        How Etherfunds Works
+                        Features
                     </Heading>
                 </HStack>
                 <Divider marginTop="4" />
                 <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={8}>
                     <FeatureBox
                         icon={<Icon as={FcDonate} w={10} h={10} />}
-                        title={"Create a Fundraiser for Fundraising"}
+                        title={"Immutable transactions"}
                         text={
-                            "It’ll take only 2 minutes. Just enter a few details about the funds you are raising for."
+                            "Due to blockchain's nature, transactions are immutable making tampering with them impossible"
                         }
                     />
                     <FeatureBox
-                        icon={<Icon as={FcShare} w={10} h={10} />}
-                        title={"Share your Fundraiser"}
+                        icon={<Icon as={FcFlashOn} w={10} h={10} />}
+                        title={"On time donations"}
                         text={
-                            "All you need to do is share the Fundraiser with your friends, family and others. In no time, support will start pouring in."
+                            "Donations reach the deprived person on time, victims should get aid fast enough in case of emergencies like floods and earthquakes.."
                         }
                     />
                     <FeatureBox
-                        icon={<Icon as={FcMoneyTransfer} w={10} h={10} />}
-                        title={"Request and Withdraw Funds"}
+                        icon={<Icon as={FcManager} w={10} h={10} />}
+                        title={"Eliminate middlemen"}
                         text={
-                            "The funds raised can be withdrawn directly to the recipient when 50% of the contributors approve of the Withdrawal Request."
+                            "Peer-to-peer will help eliminating distribution of money among middle men."
                         }
                     />
                 </SimpleGrid>
-
-            </Container> */}
+            </Container>
         </main>
     </div>;
 };
