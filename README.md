@@ -32,6 +32,7 @@
 
 - [Features](#features)
 - [Motivation](#motivation)
+- [Corner Cases](#corner-cases)
 - [Architecture](#architecture-and-design)
 - [Technologies Used](#technologies-used)
 - [Local Setup](#local-setup)
@@ -44,29 +45,24 @@
 
 - **Immutable transactions:** Blockchain being an immutable ledger will not allow any room for tampering
 - **On-time donations:** Normally it might even take many months upto years for gathering of funds and deliverun to the needy people due to the tedious and manual nature of existing systems, but Blockchain technology ensures that the transactions will not take a long time to transfer funds to deprived people
-- **Eliminating middlemen:** Blockchain eliminates the need for a middleman. With large, centralized charities, there is always the possibility that too many levels of management will eat into their funds. With blockchain-based charities, the number of middlemen between donors and those they want to help is brought to a minimum
+- **Eliminating middlemen:** Blockchain eliminates the need for a middleman due to Peer-to-Peer transactions. With large, centralized charities, there is always the possibility that too many levels of management will eat into their funds. With blockchain-based charities, the number of middlemen between donors and those they want to help is brought to a minimum
+- **Clear and concise UI:** The front-end is built with minimalistic Chakra UI components. Since users are generally cautious when it comes to transactions, the application provides descriptive steps through toastcards, alerts, etc.
 
-### Problem we are trying to solve?
+## Motivation
 
-When deciding about donating funds to charitable causes, many will wonder whether or not their contribution will have an impact. Quite a lot of nonprofit organizations have shaken people’s trust in philanthropy and made them question the credibility of charity initiatives by engaging in shady schemes to extract more revenue. Transparency is one of the key issues in today’s philanthropic world.
-<br />
-Enter blockchain technology, an immutable ledger where every record can be traced to its creation. Decentralized and distributed among its users, blockchain allows them to track transactions and be sure of the absence of fraudulent activities.
-<br />
-
-**Problems with the exisiting sytem?**
-
-Let's explore the core problems of existing fundraising platforms
-- When supporting a nonprofit is merely a click away, we may accidentally end up funding fraudulent campaigns resulting in [news like these](https://www.justice.gov/usao-ndga/pr/operator-bogus-charity-sentenced-defrauding-multiple-companies).
+The existing fundraising platforms suffer from the following problems:
 - Even with legitimate charitable organizations, some of these charities only allocate a small portion of their donations to the actual cause and the remaining goes to corporate sponsors and private operators.
 - Tampering of transactions
 
-Our PS poses offer immutablility of transactions and peer-to-peer will help eliminating distribution of money among middle men.
+**Enter blockchain technology**, an immutable ledger where every record can be traced to its creation. Decentralized and distributed among its users, blockchain allows them to track transactions and be sure of the absence of fraudulent activities.
 
 
 **Why only Ethereum Blockchain**
-<br />
+
 - The currency of Ethereum network is Ether which is a well established cryptocurrency. These days there are many new cryptocurrencies Scam Initial Coin Offerings(ICO) are completely fabricated, with fake bios of nonexistent team members and technical whitepapers
 - The community of developers which would help us in bug resolution
+
+## Corner-cases
 
 **Some Follow-ups**
 <br />
