@@ -16,7 +16,7 @@
   <br />
   <a href="#architecture">Architecture</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="#pages">Pages</a>
+  <a href="https://github.com/DevelopersLeague/Etherfunds" target="_blank">Code</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#local-setup">Local Setup</a>
   <br />
@@ -24,12 +24,13 @@
 
 <br />
 
-**Demo Video will be added here**
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UXFDYHBjoxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p> 
 
 ### Table Of Content
 
 - [Architecture](#architecture-and-design)
-- [Pages and description](#pages)
 - [Technologies Used](#technologies-used)
 - [Local Setup](#local-setup)
 - [License](#license-)
