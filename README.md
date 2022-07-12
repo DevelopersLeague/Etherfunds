@@ -103,7 +103,7 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 ## Technologies Used
 
 - Workflow and Architecture Design
-  - Excalidraw | Draw.io
+  - Excalidraw • Draw.io
 - Frontend
   - React.js and related packages
   - CSS and related packages
@@ -135,8 +135,8 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 ### Authors
 
 - Aniket More
-    - [LinkedIn](https://www.linkedin.com/in/aniket-more-2b97571b1/) || [Twitter](https://twitter.com/aniket_more311) 
- - Chirag Mahajan
-    - [Linkedin](https://www.linkedin.com/in/chirag-mahajan-b09144137/) || [GitLab](https://gitlab.com/chiragmahajan3101)
- - Shyren More
-    - [LinkedIn](https://www.linkedin.com/in/shyrenmore/) || [Gmail](mailto:shyren.more30@gmail.com)
+    - [LinkedIn](https://www.linkedin.com/in/aniket-more-2b97571b1/) • [Twitter](https://twitter.com/aniket_more311) 
+- Chirag Mahajan
+    - [Linkedin](https://www.linkedin.com/in/chirag-mahajan-b09144137/) • [GitLab](https://gitlab.com/chiragmahajan3101)
+- Shyren More
+    - [LinkedIn](https://www.linkedin.com/in/shyrenmore/) • [Gmail](mailto:shyren.more30@gmail.com)
