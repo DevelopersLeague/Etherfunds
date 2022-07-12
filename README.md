@@ -32,12 +32,7 @@
 
 - [Features](#features)
 - [Motivation](#motivation)
-<<<<<<< HEAD
 - [Architecture](#architecture)
-=======
-- [Corner Cases](#corner-cases)
-- [Architecture](#architecture-and-design)
->>>>>>> 6bb7ac479c3d7bff4feeb7f24c10f9ee84bfa4fd
 - [Technologies Used](#technologies-used)
 - [Local Setup](#local-setup)
 - [License](#license-)
@@ -68,20 +63,12 @@ The existing fundraising platforms suffer from the following problems:
 
 ## Corner-cases
 
-**Some Follow-ups**
-<br />
+**What if owner of fund is not a legitimte person and uses the fund for his own benefits after withdrawal?**
+- A safety and trust team could be created to verify personal information, the identity of recipients, and they make sure that all funds raised on Etherfunds are going to the right place. They work closely with state and local officials and law enforcement to assist in any investigations.
+- The goal is to automate the process with least human interactions therby eliminating any chances of malpractice during transaction and establishing a P2P network
 
-1) What if owner of fund is not a legitimte person and uses the fund for his own benefits after withdrawal.
-<br/>
-Ans: A safety and trust team could be created to verify personal information, the identity of recipients, and they make sure that all funds raised on Etherfunds are going to the right place. They work closely with state and local officials and law enforcement to assist in any investigations.
-<br>
-The goal is to automate the process with least human interactions therby eliminating any chances of malpractice during transaction and establishing a P2P network
-
-
-2) What if owner is a NGO and then they distribute money to management as well as to the cause, but they majorly used their funds for management, can you do something about it? 
-
-<br/>
-Ans: same as above
+**What if owner is a NGO and then they distribute money to management as well as to the cause, but they majorly used their funds for management, can you do something about it?**
+- same as above
 
 <br />
 
@@ -125,6 +112,7 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 - Smart contracts are written in **Solidity** programming language
 - Smart contracts compilation and deployment to test network was done using **Hardhat**
 - Blockchain wallet used: **MetaMask** 
+- Javascript library to communicate with blockchain: **Ethers.js**
 
 <br />
 
