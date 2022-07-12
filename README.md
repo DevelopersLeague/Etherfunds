@@ -8,7 +8,7 @@
 <h2 align="center">Etherfunds</h2>
 
 <p align="center">
-  Blockchain based Fundraising platform, that eliminates middlemen while improving the integrity of the entire process.
+  A fundraising decentralised application (DAPP), that eliminates middlemen while improving the integrity of the entire process.
   <br />
   <br />
   <a href="#table-of-content"><b>Explore the docs »</b></a>
@@ -30,6 +30,8 @@
 
 ### Table Of Content
 
+- [Features](#features)
+- [Motivation](#motivation)
 - [Architecture](#architecture-and-design)
 - [Technologies Used](#technologies-used)
 - [Local Setup](#local-setup)
@@ -37,6 +39,12 @@
 - [Authors](#authors)
 
 <br />
+
+## Features
+
+- **Immutable transactions:** Blockchain being an immutable ledger will not allow any room for tampering
+- **On-time donations:** Normally it might even take many months upto years for gathering of funds and deliverun to the needy people due to the tedious and manual nature of existing systems, but Blockchain technology ensures that the transactions will not take a long time to transfer funds to deprived people
+- **Eliminating middlemen:** Blockchain eliminates the need for a middleman. With large, centralized charities, there is always the possibility that too many levels of management will eat into their funds. With blockchain-based charities, the number of middlemen between donors and those they want to help is brought to a minimum
 
 ### Problem we are trying to solve?
 
@@ -103,7 +111,6 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 <img src="./docs/er_diagram.svg" width="90%"/>
 <br />
 
-## Pages
 
 ## Technologies Used
 
