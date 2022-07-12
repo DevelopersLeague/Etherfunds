@@ -32,8 +32,12 @@
 
 - [Features](#features)
 - [Motivation](#motivation)
+<<<<<<< HEAD
+- [Architecture](#architecture)
+=======
 - [Corner Cases](#corner-cases)
 - [Architecture](#architecture-and-design)
+>>>>>>> 6bb7ac479c3d7bff4feeb7f24c10f9ee84bfa4fd
 - [Technologies Used](#technologies-used)
 - [Local Setup](#local-setup)
 - [License](#license-)
@@ -145,8 +149,8 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 ### Authors
 
 - Aniket More
-    - [LinkedIn](https://www.linkedin.com/in/aniket-more-2b97571b1/) | [Twitter](https://twitter.com/aniket_more311) 
+    - [LinkedIn](https://www.linkedin.com/in/aniket-more-2b97571b1/) || [Twitter](https://twitter.com/aniket_more311) 
  - Chirag Mahajan
-    - [Linkedin](https://www.linkedin.com/in/chirag-mahajan-b09144137/) | [GitLab](https://gitlab.com/chiragmahajan3101)
+    - [Linkedin](https://www.linkedin.com/in/chirag-mahajan-b09144137/) || [GitLab](https://gitlab.com/chiragmahajan3101)
  - Shyren More
-    - [LinkedIn](https://www.linkedin.com/in/shyrenmore/) | [Gmail](mailto:shyren.more30@gmail.com)
+    - [LinkedIn](https://www.linkedin.com/in/shyrenmore/) || [Gmail](mailto:shyren.more30@gmail.com)
