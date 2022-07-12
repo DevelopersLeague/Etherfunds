@@ -69,6 +69,7 @@ The existing fundraising platforms suffer from the following problems:
 
 **What if owner is a NGO and then they distribute money to management as well as to the cause, but they majorly used their funds for management, can you do something about it?**
 - same as above
+- Or we can have seperate privacy policies or terms of usage for such cases
 
 <br />
 
@@ -101,8 +102,6 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 
 ## Technologies Used
 
-<br />
-
 - Workflow and Architecture Design
   - Excalidraw | Draw.io
 - Frontend
@@ -114,7 +113,6 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 - Blockchain wallet used: **MetaMask** 
 - Javascript library to communicate with blockchain: **Ethers.js**
 
-<br />
 
 ## Local-Setup
 
