@@ -129,6 +129,13 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 9. in second terminal run `$ npx hardhat run --network localhost scripts/deploy_etherfund.js` to deploy the smart contract and copy the address printed in the terminal
 10. open the `.env.development.local` file from project root and set the variable `REACT_APP_CONTRACT_ADDRESS` to the address copied above
 11. run `$ cd ../..` to go back to the project root and run `$ npm start` to start the react project
+12. Now in your React-app, enter password in your metamask wallet or any other blockchain wallet
+13. Switch to TestNetwork or add one preferably having `RPC URL` as ```http://localhost:8545``` with chain-id of 31337
+14. Create dummy accounts, you can find the private keys of dummy accounts in the terminal where ``npx hardhat node`` was ran
+15. You may see an error in browser console of ``call revert exception``, in that case, kindly reset your account and refresh the page
+16. You can use the site, congrats 🎉
+17. In case of any other errors, kindly create an [issue here](https://github.com/DevelopersLeague/Etherfunds/issues/new)
+
 
 ### License 📜
 
