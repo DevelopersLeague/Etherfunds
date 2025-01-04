@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  webserver1:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    container_name: etherfunds-chain
+
+  webserver2:
+    build:
+      context: ./src/backend
+    ports:
+      - "8545:8545"
+    container_name: etherfunds-client

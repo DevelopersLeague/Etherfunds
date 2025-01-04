@@ -118,6 +118,12 @@ The presentation for Etherfunds can be found [here](https://www.canva.com/design
 - Blockchain wallet used: **MetaMask** 
 - Javascript library to communicate with blockchain: **Ethers.js**
 
+## running with docker
+
+- run ```docker compose up --build```
+- add custom chain in metamask with rpc url ```http://localhost:8545/``` and chainid 1337
+- make sure you reset account data in metamask
+- visit http://localhost:3000
 
 ## Local-Setup
 
