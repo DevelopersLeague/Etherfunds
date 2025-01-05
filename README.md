@@ -33,6 +33,11 @@ https://user-images.githubusercontent.com/56788568/231786213-3be540b1-e84b-4c82-
 
 </p> 
 
+## Contact
+
+- For help with local setup contact on [Telegram](https://telegram.me/ShyrenMore)
+- Don't forget to star ⭐ the repo
+
 ### Table Of Content
 
 - [Features](#features)
@@ -86,8 +91,6 @@ We tried to follow ideal Software Development Design Principles such as.
 - You Ain’t Gonna Need It (YAGNI)
 
 <br />
-
-The presentation for Etherfunds can be found [here](https://www.canva.com/design/DAE3pEWUc1Y/Lrnk-dxztwBzIL4UkxrQvg/view#1).
 
 ### Block diagram
 
